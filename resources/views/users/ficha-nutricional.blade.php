@@ -273,7 +273,7 @@
 
                 <div class="my-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
                     <div class="text-start">
-                        <a href="#">Volver</a>
+                        <a href="{{ URL::previous() }}">Volver</a>
                     </div>
                     <div>
                         <button type="submit"

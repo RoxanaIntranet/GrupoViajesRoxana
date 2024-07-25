@@ -5,11 +5,12 @@ use App\Http\Controllers\CreateTravelsController;
 use App\Http\Controllers\CreatePassengerController;
 use App\Http\Controllers\CreateGroupsController;
 use App\Http\Controllers\CreatePaymentsController;
+use App\Http\Controllers\health_sheetController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardAdminController;
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +46,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/mis-datos', function () {
-    return view('users.mis-datos');
-})->middleware(['auth', 'verified'])->name('mis-datos');
+Route::get('/usuarios', [UserController::class, 'show'])->name('users.mis-datos');
+Route::post('/usuarios', [UserController::class, 'update'])->name('user.update');
+Route::put('/usuarios/update-foto', [UserController::class, 'updateFoto'])->name('usuarios.updateFoto');
 
-Route::get('/ficha-medica', function () {
-    return view('users.ficha-medica');
-})->middleware(['auth', 'verified'])->name('ficha-medica');
+Route::get('/ficha-medica', [health_sheetController::class, 'show'])->name('ficha-medica.show');
+Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('ficha-medica.store');
 
 Route::get('/ficha-nutricional', function () {
     return view('users.ficha-nutricional');

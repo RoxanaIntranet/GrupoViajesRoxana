@@ -28,8 +28,8 @@
 
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="#" method="POST">
-
+            <form action="{{ route('ficha-medica.store') }}" method="POST">
+                @csrf
                 <!-- MIS DATOS PERSONALES -->
                 <x-texthead>
                     {{ __('Mi Ficha Médica') }}
@@ -37,29 +37,29 @@
                 <div class="grid grid-cols-1 gap-4 p-6  bg-white border border-gray-200 rounded-lg shadow">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Grupo
+                            <label for="g_sanguineo" class="block text-sm font-semibold leading-6 text-gray-900">Grupo
                                 Sanguíneo</label>
                             <div class="mt-2.5">
-                                <select id="countries"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="Tipo O">Tipo O</option>
-                                    <option value="Tipo A">Tipo A</option>
-                                    <option value="Tipo B">Tipo B</option>
-                                    <option value="Tipo AB">Tipo AB</option>
-                                </select>
+                                <select id="g_sanguineo" name="g_sanguineo"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value="Seleccionar opción" {{ isset($healthSheet) && $healthSheet->grupo_sanguineo == 'Seleccionar opción' ? 'selected' : '' }}>Seleccionar opción</option>
+                                <option value="Tipo O" {{ isset($healthSheet) && $healthSheet->grupo_sanguineo == 'Tipo O' ? 'selected' : '' }}>Tipo O</option>
+                                <option value="Tipo A" {{ isset($healthSheet) && $healthSheet->grupo_sanguineo == 'Tipo A' ? 'selected' : '' }}>Tipo A</option>
+                                <option value="Tipo B" {{ isset($healthSheet) && $healthSheet->grupo_sanguineo == 'Tipo B' ? 'selected' : '' }}>Tipo B</option>
+                                <option value="Tipo AB" {{ isset($healthSheet) && $healthSheet->grupo_sanguineo == 'Tipo AB' ? 'selected' : '' }}>Tipo AB</option>
+                            </select>
                             </div>
                         </div>
 
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Factor
+                            <label for="factor_rh" class="block text-sm font-semibold leading-6 text-gray-900">Factor
                                 Rh</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="factor_rh" name="factor_rh"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="Positivo">+ Positivo</option>
-                                    <option value="Negativo">- Negativo</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->factor_rh == 'Seleccionar opción' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="Positivo" {{ isset($healthSheet) && $healthSheet->factor_rh == 'Positivo' ? 'selected' : '' }}>+ Positivo</option>
+                                    <option value="Negativo" {{ isset($healthSheet) && $healthSheet->factor_rh == 'Negativo' ? 'selected' : '' }}>- Negativo</option>
                                 </select>
                             </div>
                         </div>
@@ -111,57 +111,55 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3" id="qpreuno" style="display:none" >
                         <div>
-                            <label for="first-name"
+                            <label for="obs_tratamiento"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Observaciones</label>
                             <div class="mt-2.5">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                <input type="text" name="obs_tratamiento" id="obs_tratamiento" autocomplete="given-name" value="{{ isset($healthSheet) ? $healthSheet->tratamiento_obs : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
+                            <label for="rec_tratamiento" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
                                 Tratamiento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="rec_tratamiento" id="rec_tratamiento" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->tratamiento_rec : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
+                            <label for="nom_tratamiento" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
                                 del Medicamento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="nom_tratamiento" id="nom_tratamiento" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->tratamiento_med : '' }}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Quien
-                                lo
-                                Suministra</label>
+                            <label for="sum_tratamiento" class="block text-sm font-semibold leading-6 text-gray-900">Quien lo Suministra</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="sum_tratamiento" name="sum_tratamiento"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="El responsabel">El responsable</option>
-                                    <option value="El pasajero">El pasajero</option>
-                                    <option value="El doctor">El doctor</option>
-                                    <option value="Solicita Ayuda">Solicita Ayuda</option>
-                                    <option value="Ninguno">Ninguno</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->tratamiento_sum == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="El responsabel" {{ isset($healthSheet) && $healthSheet->tratamiento_sum == 'El responsabel' ? 'selected' : '' }}>El responsable</option>
+                                    <option value="El pasajero" {{ isset($healthSheet) && $healthSheet->tratamiento_sum == 'El pasajero' ? 'selected' : '' }}>El pasajero</option>
+                                    <option value="El doctor" {{ isset($healthSheet) && $healthSheet->tratamiento_sum == 'El doctor' ? 'selected' : '' }}>El doctor</option>
+                                    <option value="Solicita Ayuda" {{ isset($healthSheet) && $healthSheet->tratamiento_sum == 'Solicita Ayuda' ? 'selected' : '' }}>Solicita Ayuda</option>
+                                    <option value="Ninguno" {{ isset($healthSheet) && $healthSheet->tratamiento_sum == 'Ninguno' ? 'selected' : '' }}>Ninguno</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
+                            <label for="dosi_tratamiento" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
                                 al
                                 Dia</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="dosi_tratamiento" name="dosi_tratamiento"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="1 vez al día">1 vez al día</option>
-                                    <option value="2 veces al día">2 veces al día</option>
-                                    <option value="3 veces al día">3 veces al día</option>
-                                    <option value="4 veces al día">4 veces al día</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->tratamiento_dosis == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="1 vez al día" {{ isset($healthSheet) && $healthSheet->tratamiento_dosis == '1 vez al día' ? 'selected' : '' }}>1 vez al día</option>
+                                    <option value="2 veces al día" {{ isset($healthSheet) && $healthSheet->tratamiento_dosis == '2 veces al día' ? 'selected' : '' }}>2 veces al día</option>
+                                    <option value="3 veces al día" {{ isset($healthSheet) && $healthSheet->tratamiento_dosis == '3 veces al día' ? 'selected' : '' }}>3 veces al día</option>
+                                    <option value="4 veces al día" {{ isset($healthSheet) && $healthSheet->tratamiento_dosis == '4 veces al día' ? 'selected' : '' }}>4 veces al día</option>
                                 </select>
                             </div>
                         </div>
@@ -215,55 +213,55 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3" id="qpredos" style="display:none" >
                         <div>
-                            <label for="first-name"
+                            <label for="obs_enfermedad"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Observaciones</label>
                             <div class="mt-2.5">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                <input type="text" name="obs_enfermedad" id="obs_enfermedad" autocomplete="given-name" value="{{ isset($healthSheet) ? $healthSheet->enfermedad_obs : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
+                            <label for="rec_enfermedad" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
                                 Tratamiento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="rec_enfermedad" id="rec_enfermedad" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->enfermedad_rec : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
+                            <label for="nom_enfermedad" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
                                 del Medicamento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="nom_enfermedad" id="nom_enfermedad" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->enfermedad_med : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Quien
+                            <label for="sum_enfermedad" class="block text-sm font-semibold leading-6 text-gray-900">Quien
                                 lo Suministra</label>
-                            <div class="mt-2.5">
-                                <select id="countries"
+                            <div class="mt-2.5"> 
+                                <select id="sum_enfermedad" name="sum_enfermedad"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="El responsabel">El responsable</option>
-                                    <option value="El pasajero">El pasajero</option>
-                                    <option value="El doctor">El doctor</option>
-                                    <option value="Solicita Ayuda">Solicita Ayuda</option>
-                                    <option value="Ninguno">Ninguno</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->enfermedad_sum == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="El responsabe" {{ isset($healthSheet) && $healthSheet->enfermedad_sum == 'El responsabe' ? 'selected' : '' }}>El responsable</option>
+                                    <option value="El pasajero" {{ isset($healthSheet) && $healthSheet->enfermedad_sum == 'El pasajero' ? 'selected' : '' }}>El pasajero</option>
+                                    <option value="El doctor" {{ isset($healthSheet) && $healthSheet->enfermedad_sum == 'El doctor' ? 'selected' : '' }}>El doctor</option>
+                                    <option value="Solicita Ayuda" {{ isset($healthSheet) && $healthSheet->enfermedad_sum == 'Solicita Ayuda' ? 'selected' : '' }}>Solicita Ayuda</option>
+                                    <option value="Ninguno" {{ isset($healthSheet) && $healthSheet->enfermedad_sum == 'Ninguno' ? 'selected' : '' }}>Ninguno</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
+                            <label for="dosi_enfermedad" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
                                 al Dia</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="dosi_enfermedad" name="dosi_enfermedad"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="1 vez al día">1 vez al día</option>
-                                    <option value="2 veces al día">2 veces al día</option>
-                                    <option value="3 veces al día">3 veces al día</option>
-                                    <option value="4 veces al día">4 veces al día</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->enfermedad_dosis == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="1 vez al día" {{ isset($healthSheet) && $healthSheet->enfermedad_dosis == '1 vez al día' ? 'selected' : '' }}>1 vez al día</option>
+                                    <option value="2 veces al día" {{ isset($healthSheet) && $healthSheet->enfermedad_dosis == '2 veces al día' ? 'selected' : '' }}>2 veces al día</option>
+                                    <option value="3 veces al día" {{ isset($healthSheet) && $healthSheet->enfermedad_dosis == '3 veces al día' ? 'selected' : '' }}>3 veces al día</option>
+                                    <option value="4 veces al día" {{ isset($healthSheet) && $healthSheet->enfermedad_dosis == 's4 veces al día' ? 'selected' : '' }}>4 veces al día</option>
                                 </select>
                             </div>
                         </div>
@@ -317,55 +315,55 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3" id="qpretres" style="display:none" >
                         <div>
-                            <label for="first-name"
+                            <label for="obs_alergico"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Observaciones</label>
                             <div class="mt-2.5">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                <input type="text" name="obs_alergico" id="obs_alergico" autocomplete="given-name" value="{{ isset($healthSheet) ? $healthSheet->alergia_obs : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
+                            <label for="rec_alergico" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
                                 Tratamiento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="rec_alergico" id="rec_alergico" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->alergia_rec : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
+                            <label for="nom_alergico" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
                                 del Medicamento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="nom_alergico" id="nom_alergico" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->alergia_med : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Quien
+                            <label for="sum_alergico" class="block text-sm font-semibold leading-6 text-gray-900">Quien
                                 lo Suministra</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="sum_alergico" name="sum_alergico"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="El responsabel">El responsable</option>
-                                    <option value="El pasajero">El pasajero</option>
-                                    <option value="El doctor">El doctor</option>
-                                    <option value="Solicita Ayuda">Solicita Ayuda</option>
-                                    <option value="Ninguno">Ninguno</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->alergia_sum == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="El responsable" {{ isset($healthSheet) && $healthSheet->alergia_sum == 'El responsable' ? 'selected' : '' }}>El responsable</option>
+                                    <option value="El pasajero" {{ isset($healthSheet) && $healthSheet->alergia_sum == 'El pasajero' ? 'selected' : '' }}>El pasajero</option>
+                                    <option value="El doctor" {{ isset($healthSheet) && $healthSheet->alergia_sum == 'El doctor' ? 'selected' : '' }}>El doctor</option>
+                                    <option value="Solicita Ayuda" {{ isset($healthSheet) && $healthSheet->alergia_sum == 'Solicita Ayuda' ? 'selected' : '' }}>Solicita Ayuda</option>
+                                    <option value="Ninguno" {{ isset($healthSheet) && $healthSheet->alergia_sum == 'Ninguno' ? 'selected' : '' }}>Ninguno</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
+                            <label for="dosi_alergico" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
                                 al Dia</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="dosi_alergico" name="dosi_alergico"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="1 vez al día">1 vez al día</option>
-                                    <option value="2 veces al día">2 veces al día</option>
-                                    <option value="3 veces al día">3 veces al día</option>
-                                    <option value="4 veces al día">4 veces al día</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->alergia_dosis == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="1 vez al día" {{ isset($healthSheet) && $healthSheet->alergia_dosis == '1 vez al día' ? 'selected' : '' }}>1 vez al día</option>
+                                    <option value="2 veces al día" {{ isset($healthSheet) && $healthSheet->alergia_dosis == '2 veces al día' ? 'selected' : '' }}>2 veces al día</option>
+                                    <option value="3 veces al día" {{ isset($healthSheet) && $healthSheet->alergia_dosis == '3 veces al día' ? 'selected' : '' }}>3 veces al día</option>
+                                    <option value="4 veces al día" {{ isset($healthSheet) && $healthSheet->alergia_dosis == '4 veces al día' ? 'selected' : '' }}>4 veces al día</option>
                                 </select>
                             </div>
                         </div>
@@ -419,55 +417,55 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3" id="qprecuatro" style="display:none" >
                         <div>
-                            <label for="first-name"
+                            <label for="obs_alerg_ad"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Observaciones</label>
                             <div class="mt-2.5">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                <input type="text" name="obs_alerg_ad" id="obs_alerg_ad" autocomplete="given-name" value="{{ isset($healthSheet) ? $healthSheet->alergia_ad_obs : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
+                            <label for="rec_alerg_ad" class="block text-sm font-semibold leading-6 text-gray-900">Recibe
                                 Tratamiento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="rec_alerg_ad" id="rec_alerg_ad" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->alergia_ad_rec : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
+                            <label for="nom_alerg_ad" class="block text-sm font-semibold leading-6 text-gray-900">Nombre
                                 del Medicamento</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="nom_alerg_ad" id="nom_alerg_ad" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->alergia_ad_med : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Quien
+                            <label for="sum_alerg_ad" class="block text-sm font-semibold leading-6 text-gray-900">Quien
                                 lo Suministra</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="sum_alerg_ad" name="sum_alerg_ad"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="El responsabel">El responsable</option>
-                                    <option value="El pasajero">El pasajero</option>
-                                    <option value="El doctor">El doctor</option>
-                                    <option value="Solicita Ayuda">Solicita Ayuda</option>
-                                    <option value="Ninguno">Ninguno</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->alergia_ad_sum == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="El responsable" {{ isset($healthSheet) && $healthSheet->alergia_ad_sum == 'El responsable' ? 'selected' : '' }}>El responsable</option>
+                                    <option value="El pasajero" {{ isset($healthSheet) && $healthSheet->alergia_ad_sum == 'El pasajero' ? 'selected' : '' }}>El pasajero</option>
+                                    <option value="El doctor" {{ isset($healthSheet) && $healthSheet->alergia_ad_sum == 'El doctor' ? 'selected' : '' }}>El doctor</option>
+                                    <option value="Solicita Ayuda" {{ isset($healthSheet) && $healthSheet->alergia_ad_sum == 'Solicita Ayuda' ? 'selected' : '' }}>Solicita Ayuda</option>
+                                    <option value="Ninguno" {{ isset($healthSheet) && $healthSheet->alergia_ad_sum == 'Ninguno' ? 'selected' : '' }}>Ninguno</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
+                            <label for="dosi_alerg_ad" class="block text-sm font-semibold leading-6 text-gray-900">Dosis
                                 al Dia</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="dosi_alerg_ad" name="dosi_alerg_ad"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="1 vez al día">1 vez al día</option>
-                                    <option value="2 veces al día">2 veces al día</option>
-                                    <option value="3 veces al día">3 veces al día</option>
-                                    <option value="4 veces al día">4 veces al día</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->alergia_ad_dosis == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="1 vez al día" {{ isset($healthSheet) && $healthSheet->alergia_ad_dosis == '1 vez al día' ? 'selected' : '' }}>1 vez al día</option>
+                                    <option value="2 veces al día" {{ isset($healthSheet) && $healthSheet->alergia_ad_dosis == '2 veces al día' ? 'selected' : '' }}>2 veces al día</option>
+                                    <option value="3 veces al día" {{ isset($healthSheet) && $healthSheet->alergia_ad_dosis == '3 veces al día' ? 'selected' : '' }}>3 veces al día</option>
+                                    <option value="4 veces al día" {{ isset($healthSheet) && $healthSheet->alergia_ad_dosis == '4 veces al día' ? 'selected' : '' }}>4 veces al día</option>
                                 </select>
                             </div>
                         </div>
@@ -477,40 +475,41 @@
 
                     <H2 class="mt-5 font-bold">Inmunizaciones Recibidas</H2>
 
-                    <div
-                        class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200
-                     rounded-lg">
+                    <div class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
                         <div class="m-0">
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white sm:flex">
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="vue-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="tetano" type="checkbox" name="inmunizacion[]" value="Tetano"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Tetano', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="vue-checkbox-list"
                                             class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tetano</label>
                                     </div>
                                 </li>
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="react-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="rubiola" type="checkbox" name="inmunizacion[]" value="Rubiola"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Rubiola', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="react-checkbox-list"
                                             class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Rubiola</label>
                                     </div>
                                 </li>
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="angular-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="hepatitis B" type="checkbox" name="inmunizacion[]" value="Hepatitis B"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Hepatitis B', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="angular-checkbox-list"
-                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hepatitis
-                                            B</label>
+                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hepatitis B</label>
                                     </div>
                                 </li>
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="laravel-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="sarampion" type="checkbox" name="inmunizacion[]" value="Sarampión"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Sarampión', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="laravel-checkbox-list"
                                             class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sarampión</label>
                                     </div>
@@ -521,33 +520,36 @@
                             <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white sm:flex">
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="vue-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="influenza" type="checkbox" name="inmunizacion[]" value="Influenza"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Influenza', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="vue-checkbox-list"
                                             class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Influenza</label>
                                     </div>
                                 </li>
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="react-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="fiebre amarilla" type="checkbox" name="inmunizacion[]" value="Fiebre Amarilla"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Fiebre Amarilla', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="react-checkbox-list"
-                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fiebre
-                                            Amarilla</label>
+                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fiebre Amarilla</label>
                                     </div>
                                 </li>
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="angular-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="tuberculosis" type="checkbox" name="inmunizacion[]" value="Tuberculosis"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Tuberculosis', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="angular-checkbox-list"
                                             class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tuberculosis</label>
                                     </div>
                                 </li>
                                 <li class="w-full">
                                     <div class="flex items-center ps-3">
-                                        <input id="laravel-checkbox-list" type="checkbox" value=""
-                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <input id="otro" type="checkbox" name="inmunizacion[]" value="Otro"
+                                            class="w-4 h-4 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            {{ isset($healthSheet->inmunizacion) && in_array('Otro', $healthSheet->inmunizacion) ? 'checked' : '' }}>
                                         <label for="laravel-checkbox-list"
                                             class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Otro</label>
                                     </div>
@@ -558,33 +560,32 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Vacunas
+                            <label for="vac_adicionales" class="block text-sm font-semibold leading-6 text-gray-900">Vacunas
                                 Adicionales</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="vac_adicionales" id="vac_adicionales" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->vacunas_adicionales : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Vacunas
-                                Covid</label>
+                            <label for="vacunas_covid" class="block text-sm font-semibold leading-6 text-gray-900">Vacunas Covid</label>
                             <div class="mt-2.5">
-                                <select id="countries"
+                                <select id="vacunas_covid" name="vacunas_covid"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    <option selected>Seleccionar opción</option>
-                                    <option value="Primera Dosis">Primera Dosis</option>
-                                    <option value="Segunda Dosis">Segunda Dosis</option>
-                                    <option value="Tercera Dosis">Tercera Dosis</option>
-                                    <option value="Cuarta Dosis">Cuarta Dosis</option>
-                                    <option value="Quinta Dosis">Quinta Dosis</option>
+                                    <option value="seleccionar opcion" {{ isset($healthSheet) && $healthSheet->vacunas_covid == 'seleccionar opcion' ? 'selected' : '' }}>Seleccionar opción</option>
+                                    <option value="Primera Dosis" {{ isset($healthSheet) && $healthSheet->vacunas_covid == 'Primera Dosis' ? 'selected' : '' }}>Primera Dosis</option>
+                                    <option value="Segunda Dosis" {{ isset($healthSheet) && $healthSheet->vacunas_covid == 'Segunda Dosis' ? 'selected' : '' }}>Segunda Dosis</option>
+                                    <option value="Tercera Dosis" {{ isset($healthSheet) && $healthSheet->vacunas_covid == 'Tercera Dosis' ? 'selected' : '' }}>Tercera Dosis</option>
+                                    <option value="Cuarta Dosis" {{ isset($healthSheet) && $healthSheet->vacunas_covid == 'Cuarta Dosis' ? 'selected' : '' }}>Cuarta Dosis</option>
+                                    <option value="Quinta Dosis" {{ isset($healthSheet) && $healthSheet->vacunas_covid == 'Quinta Dosis' ? 'selected' : '' }}>Quinta Dosis</option>
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Efectos
+                            <label for="efec_secund" class="block text-sm font-semibold leading-6 text-gray-900">Efectos
                                 Secundarios</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="efec_secund" id="efec_secund" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->efecto_secundarios : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -596,11 +597,10 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-1">
                         <div>
-                            <label for="last-name"
-                                class="block text-sm font-semibold leading-6 text-gray-900">Informacion
-                                Adicional</label>
+                            <label for="info_ad"
+                                class="block text-sm font-semibold leading-6 text-gray-900">Informacion Adicional</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="info_ad" id="info_ad" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->informacion_adicional_salud : '' }}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -610,10 +610,10 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Tarjeta
+                            <label for="tar_seguro" class="block text-sm font-semibold leading-6 text-gray-900">Tarjeta
                                 de Seguro de Viaje</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" disabled value="Medix Travel"
+                                <input type="text" name="tar_seguro" id="tar_seguro" disabled value="Medix Travel"
                                     autocomplete="family-name"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
                                     text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -622,11 +622,11 @@
                             </div>
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Tarjeta
+                            <label for="tar_seguro_pri" class="block text-sm font-semibold leading-6 text-gray-900">Tarjeta
                                 de Seguro Privado</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name"
-                                    placeholder="Ejemplo: Rimac plan Familiar" autocomplete="family-name"
+                                <input type="text" name="tar_seguro_priv" id="tar_seguro_priv"
+                                    placeholder="Ejemplo: Rimac plan Familiar" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->tarjeta_seguro_privado : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -634,20 +634,20 @@
 
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
-                            <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">
+                            <label for="hist_medic" class="block text-sm font-semibold leading-6 text-gray-900">
                                 Historial Médico (opcional)
                             </label>
                             <div class="mt-2.5">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                <input type="text" name="hist_medic" id="hist_medic" autocomplete="given-name" value="{{ isset($healthSheet) ? $healthSheet->hist_medico : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div>
-                            <label for="last-name"
+                            <label for="hist_salud_em"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Historial
                                 de Salud Emocional (opcional)</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                <input type="text" name="hist_salud_em" id="hist_salud_em" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->hist_med_em : ''}}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -659,20 +659,15 @@
 
                 <div class="my-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
                     <div class="text-start">
-                        <a href="#">Volver</a>
+                        <a href="{{ URL::previous() }}">Volver</a>
                     </div>
                     <div>
-                        <button type="submit"
-                            class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
-                        text-center text-sm font-semibold text-white shadow-sm 
-                        hover:bg-red-rv focus-visible:outline 
-                        focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline--red-rv">
+                        <button type="submit" class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-rv focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline--red-rv">
                             GUARDAR CAMBIOS
                         </button>
                     </div>
                     <div class="text-end">
-                        <a href="#">Siguiente</a>
+                        <a href="/ficha-nutricional">Siguiente</a>
                     </div>
                 </div>
             </form>
@@ -682,14 +677,12 @@
             <x-texthead>
                 {{ __('Tratamiento Médico Recibido Durante el Viaje') }}
             </x-texthead>
-            <div
-                class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4 p-6 py-8 mb-6
-                 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4 p-6 py-8 mb-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div>
-                    <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Tu Doctor
+                    <label for="doc_viaje" class="block text-sm font-semibold leading-6 text-gray-900">Tu Doctor
                         Viajero</label>
                     <div class="mt-2.5">
-                        <input type="text" name="last-name" id="last-name" disabled value="Nombre del Doctor"
+                        <input type="text" name="doc_viaje" id="doc_viaje" disabled value="Nombre del Doctor"
                             autocomplete="family-name"
                             class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
                             text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -698,10 +691,10 @@
                     </div>
                 </div>
                 <div>
-                    <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Tratamiento
+                    <label for="trata_recib" class="block text-sm font-semibold leading-6 text-gray-900">Tratamiento
                         Recibido</label>
                     <div class="mt-2.5">
-                        <input type="text" name="last-name" id="last-name" disabled value="---"
+                        <input type="text" name="trata_recib" id="trata_recib" disabled value="---"
                             autocomplete="family-name"
                             class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
                             text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -710,10 +703,10 @@
                     </div>
                 </div>
                 <div>
-                    <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Indicaciones
+                    <label for="indic_medi" class="block text-sm font-semibold leading-6 text-gray-900">Indicaciones
                         Médicas</label>
                     <div class="mt-2.5">
-                        <input type="text" name="last-name" id="last-name" disabled value="---"
+                        <input type="text" name="indic_medi" id="indic_medi" disabled value="---"
                             autocomplete="family-name"
                             class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
                             text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -722,13 +715,8 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit"
-                        class="block w-full rounded-md bg-red-rv px-3.5 py-6 text-center text-sm font-semibold
-                         text-white shadow-sm hover:bg-red-rv focus-visible:outline focus-visible:outline-2
-                          focus-visible:outline-offset-2 focus-visible:outline-red-rv">DESCARGAR
-                        FICHA </button>
+                    <button type="submit" class="block w-full rounded-md bg-red-rv px-3.5 py-6 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-rv focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-rv">DESCARGAR FICHA</button>
                 </div>
-
             </div>
         </div>
     </div>

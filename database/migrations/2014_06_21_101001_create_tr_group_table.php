@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('telefono_encargado');
             $table->string('grado');
             $table->string('seccion');
-            
+            $table->timestamps();
             $table->foreign('travelID')->references('travelID')->on('tr_travels');
         });
     }

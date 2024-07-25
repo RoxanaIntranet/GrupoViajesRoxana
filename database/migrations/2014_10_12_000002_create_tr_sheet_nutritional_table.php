@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('detalles_dieta');
             $table->string('habitos');
             $table->text('detalles_habitos');
-            
+            $table->timestamps();
             $table->foreign('userID')->references('id')->on('users');
         });
     }

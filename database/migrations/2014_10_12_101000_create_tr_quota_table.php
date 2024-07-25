@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('status_pay');
             $table->string('valid_status');
             $table->text('resume');
-            
+            $table->timestamps();
             $table->foreign('travelID')->references('travelID')->on('tr_travels');
             $table->foreign('userID')->references('id')->on('users');
         });
