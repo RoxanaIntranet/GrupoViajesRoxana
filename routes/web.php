@@ -6,6 +6,7 @@ use App\Http\Controllers\CreatePassengerController;
 use App\Http\Controllers\CreateGroupsController;
 use App\Http\Controllers\CreatePaymentsController;
 use App\Http\Controllers\health_sheetController;
+use App\Http\Controllers\Sheet_NutritionalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -53,9 +54,9 @@ Route::put('/usuarios/update-foto', [UserController::class, 'updateFoto'])->name
 Route::get('/ficha-medica', [health_sheetController::class, 'show'])->name('ficha-medica.show');
 Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('ficha-medica.store');
 
-Route::get('/ficha-nutricional', function () {
-    return view('users.ficha-nutricional');
-})->middleware(['auth', 'verified'])->name('ficha-nutricional');
+
+Route::get('/ficha-nutritional', [Sheet_NutritionalController::class, 'show'])->name('nutritional-sheet.show');
+Route::post('/ficha-nutritional', [Sheet_NutritionalController::class, 'store'])->name('nutritional-sheet.store');
 
 Route::get('/tu-viaje', function () {
     return view('users.tu-viaje');

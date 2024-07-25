@@ -142,7 +142,7 @@
                       <img src="/images/health.png" alt="#">
                   </div>
                   <div>
-                      <a href="{{ route('ficha-nutricional') }}">
+                      <a href="{{ route('nutritional-sheet.show') }}">
                           <x-roxana-button>
                               {{ __('VER MÁS') }}
                           </x-roxana-button>

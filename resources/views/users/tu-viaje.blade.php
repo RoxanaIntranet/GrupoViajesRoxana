@@ -6,7 +6,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-center col-span-2">
                     <div class="p-5 text-white-rv dark:text-gray-100 text-lg pl-16">
                         <div class="text-white-rv text-3xl">
-                            {!! __('Tu viaje a , ') !!} <b> Nombre Viaje{{ Auth::user()->viaje }}
+                            {!! __('Tu viaje a , ') !!} <b> Punta Cana{{ Auth::user()->viaje }}
                                 {{ Auth::user()->nameviaje }}</b>!<br>
                         </div>
 
