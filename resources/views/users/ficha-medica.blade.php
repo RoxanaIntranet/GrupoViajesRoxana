@@ -1,22 +1,22 @@
 <x-approxana-layout>
-
-    <div class="pt-12">
+    <div class="m-6 text-center sm:pt-12 sm:text-left">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-red-rv dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-3">
-                <div class="flex flex-col md:flex-row justify-between items-center col-span-2">
-                    <div class="p-5 text-white-rv dark:text-gray-100 text-lg pl-16">
+            <div class="bg-red-rv dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 sm:grid-cols-3 p-6 gap-4">
+                <div class="flex flex-col md:flex-row justify-between items-center sm:col-span-2">
+                    <div class="p-5 text-white-rv dark:text-gray-100 text-lg sm:pl-16">
                         <div class="text-white-rv text-3xl">
-                            {!! __('¡Hola ,') !!} <b>{{ Auth::user()->name }} {{ Auth::user()->apellidos }}</b>!<br>
+                            {!! __('¡Hola ,') !!} <b>{{ explode(' ', Auth::user()->name)[0] }}
+                                {{ explode(' ', Auth::user()->apellidos)[0] }}</b>!<br>
                         </div>
 
-                        <p class="mt-4 text-white-rv-400 text-base font-extraLight">
+                        <p class="mt-4 text-white-rv-400 text-base font-Light">
                             {!! __(
                                 'Para brindarte un servicio más personalizado y eficiente, por favor completa la siguiente información médica:',
                             ) !!}
                         </p>
                     </div>
                 </div>
-                <div class="p-0 text-white-rv dark:text-gray-100 pr-16 pt-5">
+                <div class="flex align-middle p-0 text-white-rv dark:text-gray-100 sm:pr-16 pt-5">
                     <img src="/images/nurse.png" alt="" class="pb-0 w-64">
                 </div>
             </div>
@@ -26,7 +26,7 @@
 
     <!--- div formulario --->
 
-    <div class="py-2">
+    <div class="p-6 pt-0 sm:py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <form action="{{ route('ficha-medica.store') }}" method="POST">
                 @csrf
@@ -638,8 +638,8 @@
                                 Historial Médico (opcional)
                             </label>
                             <div class="mt-2.5">
-                                <input type="text" name="hist_medic" id="hist_medic" autocomplete="given-name" value="{{ isset($healthSheet) ? $healthSheet->hist_medico : ''}}"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                                
                             </div>
                         </div>
                         <div>
@@ -647,8 +647,7 @@
                                 class="block text-sm font-semibold leading-6 text-gray-900">Historial
                                 de Salud Emocional (opcional)</label>
                             <div class="mt-2.5">
-                                <input type="text" name="hist_salud_em" id="hist_salud_em" autocomplete="family-name" value="{{ isset($healthSheet) ? $healthSheet->hist_med_em : ''}}"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
                             </div>
                         </div>
                     </div>
@@ -657,14 +656,40 @@
 
                 <!-- BOTONES GUARDAR -->
 
-                <div class="my-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
+                <div class="my-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 max-sm:hidden">
                     <div class="text-start">
                         <a href="{{ URL::previous() }}">Volver</a>
                     </div>
                     <div>
-                        <button type="submit" class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-rv focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline--red-rv">
+                        <button type="submit"
+                            class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
+                        text-center text-sm font-semibold text-white shadow-sm 
+                        hover:bg-red-rv focus-visible:outline 
+                        focus-visible:outline-2 focus-visible:outline-offset-2
+                         focus-visible:outline--red-rv">
                             GUARDAR CAMBIOS
                         </button>
+                    </div>
+                    <div class="text-end">
+                        <a href="/ficha-nutritional">Siguiente</a>
+                    </div>
+                </div>
+
+                <!-- BOTONES GUARDAR PHONE -->
+                <div class="my-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 sm:hidden">
+                    
+                    <div class="col-span-2">
+                        <button type="submit"
+                            class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
+                        text-center text-sm font-semibold text-white shadow-sm 
+                        hover:bg-red-rv focus-visible:outline 
+                        focus-visible:outline-2 focus-visible:outline-offset-2
+                         focus-visible:outline--red-rv ">
+                            GUARDAR CAMBIOS
+                        </button>
+                    </div>
+                    <div class="text-start">
+                        <a href="{{ URL::previous() }}">Volver</a>
                     </div>
                     <div class="text-end">
                         <a href="/ficha-nutricional">Siguiente</a>
