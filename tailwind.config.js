@@ -12,15 +12,16 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 sans: ['Poppins', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 'bdark-rv': '#1C2434',
                 'white-rv': '#f8fafc',
-                'red-rv' :  '#CC2A41',
-                'wsp-rv' :  '#25d366',
-                'marfil-rv' : '#F5F5F5'
+                'red-rv': '#d52e27',
+                'gray-rv' : '#787d80',
+                'wsp-rv': '#25d366',
+                'marfil-rv': '#F5F5F5',
+                'lattam-plomo' : '#F7F7FD'
             },
             fontWeight: {
                 extraLight: 100,

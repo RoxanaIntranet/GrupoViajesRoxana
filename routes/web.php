@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\CheckinController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/usuarios', [UserController::class, 'show'])->name('users.mis-datos');
 Route::post('/usuarios', [UserController::class, 'update'])->name('user.update');
 Route::put('/usuarios/update-foto', [UserController::class, 'updateFoto'])->name('usuarios.updateFoto');
+Route::post('/upload-users', [UserController::class, 'import'])->name('users.import');
+Route::get('/importar-usuario', [UserController::class, 'importacionUser'])->name('importar.usuario');
+
 
 Route::get('/ficha-medica', [health_sheetController::class, 'show'])->name('ficha-medica.show');
 Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('ficha-medica.store');
@@ -58,9 +61,30 @@ Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('fi
 Route::get('/ficha-nutritional', [Sheet_NutritionalController::class, 'show'])->name('nutritional-sheet.show');
 Route::post('/ficha-nutritional', [Sheet_NutritionalController::class, 'store'])->name('nutritional-sheet.store');
 
-Route::get('/tu-viaje', function () {
+Route::middleware(['auth'])->group(function () {
+Route::get('/mi-checkin', [CheckinController::class, 'show'])->name('mi-checkin.show');
+Route::delete('/mi-checkin/{id}', [CheckinController::class, 'destroy'])->name('mi-checkin.destroy');
+Route::post('/mi-checkin', [CheckinController::class, 'store'])->name('mi-checkin.store');
+});
+
+
+Route::get('/viajes', [CreateTravelsController::class, 'index'])->name('viajes');
+Route::get('/mi-viaje/{groupId}', [CreateTravelsController::class, 'showTripDetails'])->name('tu-viaje');
+Route::get('/mi-viaje/{groupId}/itinerario', [CreateTravelsController::class, 'downloadItinerario'])->name('download-itinerario');
+Route::get('/mi-viaje/{groupId}/indicaciones', [CreateTravelsController::class, 'downloadIndicaciones'])->name('download-indicaciones');
+Route::get('/mi-viaje/{groupId}/recomendaciones', [CreateTravelsController::class, 'downloadRecomendaciones'])->name('download-recomendaciones');
+Route::get('/mi-viaje/{groupId}/ropaviajes', [CreateTravelsController::class, 'downloadRopaViaje'])->name('download-ropaviajes');
+Route::get('/mi-viaje/{groupId}/permisonotarial', [CreateTravelsController::class, 'downloadPermisoNotarial'])->name('download-permisonotarial');
+Route::get('/mi-viaje/{groupId}/voucher', [CreateTravelsController::class, 'downloadVoucher'])->name('download-voucher');
+Route::get('/mi-viaje/{groupId}/listaclinicas', [CreateTravelsController::class, 'downloadListaClinicas'])->name('download-listaclinicas');
+
+/*Route::get('/tu-viaje', function () {
     return view('users.tu-viaje');
 })->middleware(['auth', 'verified'])->name('tu-viaje');
+
+Route::get('/viajes', function () {
+    return view('users.viajes');
+})->middleware(['auth', 'verified'])->name('viajes');*/
 
 Route::get('/mi-itinerario', function () {
     return view('users.mi-itinerario');
@@ -74,16 +98,22 @@ Route::get('/mi-documento', function () {
     return view('users.mi-documento');
 })->middleware(['auth', 'verified'])->name('mi-documento');
 
-Route::get('/mi-checkin', function () {
-    return view('users.mi-checkin');
-})->middleware(['auth', 'verified'])->name('mi-checkin');
-
 Route::get('/mi-cronograma', function () {
     return view('users.mi-cronograma');
 })->middleware(['auth', 'verified'])->name('mi-cronograma');
+
 Route::get('/principal', function () {
     return view('users.principal');
 })->middleware(['auth', 'verified'])->name('principal');
+
+Route::get('/mi-perfil', function () {
+    return view('users.mi-perfil');
+})->middleware(['auth', 'verified'])->name('mi-perfil');
+
+Route::get('/contacto', function () {
+    return view('users.contacto');
+})->middleware(['auth', 'verified'])->name('contacto');
+
 
 require __DIR__.'/auth.php';
 

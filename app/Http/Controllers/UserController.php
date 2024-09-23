@@ -89,14 +89,24 @@ class UserController extends Controller
             'telefono' => 'nullable|string|max:15',
             // Agrega otras validaciones según sea necesario
         ]);*/
-        
+       /*$user->apellidos = $request->input('apellidos');*/ 
         $user->sexo = $request->input('genero');
         $user->tip_documento = $request->input('tipo_documento');
         $user->documento = $request->input('documento');
         $nacimiento = Carbon::createFromFormat('m/d/Y', $request->input('nacimiento'))->format('Y-m-d');
-        $user->nacimiento = $nacimiento;
+        /*$user->nacimiento = $nacimiento;*/
+	 // Verificar el formato de la fecha de nacimiento
+    /*$nacimientoInput = $request->input('nacimiento');
+    if ($nacimientoInput && \DateTime::createFromFormat('d/m/Y', $nacimientoInput) !== false) {
+        $nacimiento = Carbon::createFromFormat('d/m/Y', $nacimientoInput)->format('Y-m-d');
+    } else {
+        // Si no se proporciona una fecha válida, usar la fecha actual
+        $nacimiento = Carbon::now()->format('Y-m-d');
+    }*/
+    $user->nacimiento = $nacimiento;
         $user->edad = $request->input('edad');
         $user->direccion = $request->input('direccion');
+        $user->telefono = $request->input('celular');
         $user->pais_origen = $request->input('p_origen');
         $user->nombre_emer = $request->input('nombre_emer');
         $user->apellido_emer = $request->input('apellido_emer');
@@ -115,10 +125,16 @@ class UserController extends Controller
         //dd($user);
         $user->save();
 
-        return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
+        //return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
+        return response()->json([
+            'success' => true,
+            'message' => 'Los datos se han cambiado correctamente.'
+        ]);
     }
     public function updateFoto(Request $request)
     {
+	try {
+
         $user = Auth::user();
 
         $request->validate([
@@ -129,8 +145,8 @@ class UserController extends Controller
             // Eliminar la imagen antigua si existe
             $image = Image::make($request->file('avatar'));
 
-            if ($image->width() !== 512 || $image->height() !== 512) {
-                return redirect()->back()->withErrors(['avatar' => 'La imagen debe tener un tamaño de 512x512 píxeles.']);
+            if ($image->width() == 512 || $image->height() == 512) {
+                return response()->json(['success' => false, 'message' => 'La imagen debe tener un tamaño de 512x512 píxeles.']);
             }
             if ($user->foto) {
                 Storage::delete('public/' . $user->foto);
@@ -143,7 +159,10 @@ class UserController extends Controller
         }
 
         return response()->json(['success' => true, 'avatar_url' => asset('storage/' . $user->foto)]);
+    }catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()]);
     }
+}
     /**
      * Remove the specified resource from storage.
      *

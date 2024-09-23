@@ -5,26 +5,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Viajes Roxana - Intranet</title>
+        <link rel="icon" href="{{ asset('rox.ico') }}" type="image/x-icon">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        @if (app()->environment('local'))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ asset('build/assets/app-O2fSYjAY.css') }}">
+        <script type="module" src="{{ asset('build/assets/app-D_CBjKNX.js') }}"></script>
+    @endif
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900" style="background-image: url('images/background-rv.png'); background-size: cover; background-position: center;">
-            <div>
-                <a href="/">
-                    <x-application-logo-color class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-marfil-rv dark:bg-gray-800 shadow-xl shadow-inner overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+        <div class="min-h-screen flex flex-col bg-lattam-plomo">
+            {{ $slot }}
         </div>
     </body>
 </html>

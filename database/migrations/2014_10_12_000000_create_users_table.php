@@ -19,10 +19,20 @@ return new class extends Migration
             $table->string('name');
             $table->string('apellidos')->default(''); // Valor predeterminado
             $table->string('telefono')->nullable(); // Hacer nullable si es necesario
-            $table->string('email')->unique();
+            $table->string('username')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+	    $table->string('nombre_padre1')->nullable();
+            $table->string('apellido_padre1')->nullable();
+            $table->string('telefono_padre1')->nullable();
+            $table->string('nombre_padre2')->nullable();
+            $table->string('apellido_padre2')->nullable();
+            $table->string('telefono_padre2')->nullable();
+            $table->string('politica')->nullable();
+            $table->string('terminos')->nullable();
+            $table->string('promociones')->nullable();
             $table->string('sexo')->nullable(); // Hacer nullable si es necesario
             $table->string('tip_documento')->nullable();
             $table->string('documento')->nullable(); // Hacer nullable si es necesario

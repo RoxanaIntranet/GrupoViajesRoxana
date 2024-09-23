@@ -70,7 +70,7 @@
                 <div class="grid grid-cols-1 gap-4">
                     <div>
                         <div class="mt-2.5 border-dashed border-2 border-black py-10 flex justify-center">
-                            <a href="#" class="flex flex-col content-center items-center">
+                            <a class="flex flex-col content-center items-center">
                                 <img src="/images/FotosyVideos02.png" alt="" width="150px">
                                 Descargar Fotos del Viaje
                             </a>
@@ -87,13 +87,13 @@
                     <a href="{{ URL::previous() }}">Volver</a>
                 </div>
                 <div>
-                    <button type="submit"
+                    <button
                         class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
                     text-center text-sm font-semibold text-white shadow-sm 
                     hover:bg-red-rv focus-visible:outline 
                     focus-visible:outline-2 focus-visible:outline-offset-2
-                     focus-visible:outline--red-rv">
-                        GUARDAR CAMBIOS
+                     focus-visible:outline--red-rv" disabled>
+                        DESCARGAR FOTOS Y VIDEOS
                     </button>
                 </div>
                 <div class="text-end">
@@ -105,13 +105,13 @@
             <div class="my-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 sm:hidden">
 
                 <div class="col-span-2">
-                    <button type="submit"
+                    <button
                         class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
                     text-center text-sm font-semibold text-white shadow-sm 
                     hover:bg-red-rv focus-visible:outline 
                     focus-visible:outline-2 focus-visible:outline-offset-2
                      focus-visible:outline--red-rv ">
-                        GUARDAR CAMBIOS
+                        DESCARGAR FOTOS Y VIDEOS
                     </button>
                 </div>
                 <div class="text-start">
