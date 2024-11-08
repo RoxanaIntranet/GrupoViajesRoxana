@@ -4,7 +4,7 @@
 
 
     <div class="mt-8 text-center max-sm:px-6 mb-6">
-        <p class="text-2xl font-bold text-red-rv italic "> !Bienvenido/a a tu próxima aventura¡ </p>
+        <p class="text-2xl font-bold text-red-rv italic "> ¡Bienvenido/a a tu próxima aventura!</p>
     </div>
     <div class=" max-w-screen-lg mx-auto">
         <div class="bg-white border-t-4 border-red-rv rounded-lg shadow-2xl shadow-current ">
@@ -71,7 +71,11 @@
                     <!-- Remember Me -->
                     <div class="block mt-4">
                         <label for="remember_me" class="inline-flex items-center text-red-rv">
-                            <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-red-rv shadow-sm" name="remember">
+                            <input
+                                id="remember_me"
+                                type="checkbox"
+                                class="w-4 h-4 border-gray-300 text-red-rv bg-gray-100 border-gray-300 rounded focus:ring-red-rv focus:ring-2"
+                                name="remember">
                             <span class="ml-2 text-sm text-red-rv">{{ __('Recordar') }}</span>
                         </label>
                     </div>
@@ -85,7 +89,7 @@
 
                     <div class="flex flex-row justify-between">
                         <div class="flex items-center justify-start mt-2 gap-2">
-                                <p class="text-sm ">Aún no tienes cuenta</p>
+                                <p class="text-sm ">¿Aún no tienes cuenta?</p>
                                 <a class="text-sm text-red-rv hover:underline"
                                     href="https://grupoviajesroxana.com/register">
                                     Registrate aqui
@@ -115,8 +119,8 @@
     <div>
         <div class="mt-8 text-center max-sm:px-6 pt-8">
             <p class=" text-sm text-gray-rv">
-                Protegido por reCAPTCHA, se aplica a las <br><a target="_blank" href="https://viajesroxana.com/archive/politicas-privacidad.pdf" class="text-black underline hover:text-red-rv"> Políticas de Privacidad</a> y 
-                a los <a target="_blank" href="https://viajesroxana.com/archive/terminos-condiciones-intranet.pdf" class="text-black underline hover:text-red-rv">Términos y Condiciones.</a>
+                Protegido por reCAPTCHA, se aplica a las <br><a target="_blank" href="https://viajesroxana.com/avisos-legales/politica-de-privacidad-y-seguridad/" class="text-black underline hover:text-red-rv"> Políticas de Privacidad</a> y 
+                a los <a target="_blank" href="https://viajesroxana.com/avisos-legales/terminos-y-condiciones-intranet/" class="text-black underline hover:text-red-rv">Términos y Condiciones.</a>
             </p>
         </div>
     </div>

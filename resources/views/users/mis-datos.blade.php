@@ -2,7 +2,7 @@
     <div class="mt-6 text-center sm:text-left">
         <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 flex flex-row justify-between max-sm:flex-col max-sm:px-4">
             <div>
-                <a href="{{ route('mi-perfil') }}"
+                <a href="{{ route('dashboard') }}"
                     class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
@@ -12,7 +12,7 @@
                     <p>Ir a mi Perfil</p>
                 </a>
             </div>
-            <!--<div class="flex flex-row gap-4 max-sm:pt-4">
+            <div class="flex flex-row gap-4 max-sm:pt-4">
                 <a href="{{ route('ficha-medica.show') }}"
                     class="flex items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
                     <p>Ficha Médica</p>
@@ -21,7 +21,7 @@
                     class="flex items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
                     <p>Ficha Nutricional</p>
                 </a>
-            </div>-->
+            </div>
         </div>
     </div>
 
@@ -30,13 +30,13 @@
         <div class="max-w-7xl mx-auto mt-10 mb-8 sm:px-6 lg:px-8 max-sm:px-6" >
             <div class="flex flex-row text-center gap-6 mb-8 items-center max-sm:flex-col">
                 <h3 class=" font-normal text-5xl">Mis Datos</h3>
-                <!--<div class="w-80 bg-gray-300 rounded-md ">
-                    <p class="text-center bg-green-400 border border-green-400 rounded-md w-72 ">95% completado</p>
-                </div>-->
+                
+                <div class="progress w-80 bg-gray-300 rounded-md">
+                    <p class="progress-bar text-center bg-green-400 border border-green-400 rounded-md w-72" role="progressbar" id="progress-bar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0% completado</p>
+                </div>
             </div>
             <div>
-                <p>En esta sección, puedes actualizar tu perfil personal.
-                    Esto nos permitirá ofrecerte un servicio más personalizado y eficiente.</p>
+                <p>Actualiza tu información personal para que podamos brindarte un servicio más personalizado y eficiente.</p>
             </div>
         </div>
     </div>
@@ -90,16 +90,16 @@
                             @csrf
                             <div class="mt-2.5">
                                 <label for="name"
-                                    class="block text-sm font-semibold leading-6 text-gray-900">Nombres</label>
+                                    class="block text-sm font-semibold leading-6 text-gray-900">Nombres <span class=" text-red-rv">*</span></label>
                                 <div class="mt-2.5">
                                     <input type="text" name="name" id="name" autocomplete="given-name"
                                         value="{{ $user->name }}" readonly disabled
-                                        class="bg-gray-50 block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                                        class=" bg-gray-50 block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="mt-2.5">
                                 <label for="apellidos"
-                                    class="block text-sm font-semibold leading-6 text-gray-900">Apellidos</label>
+                                    class="block text-sm font-semibold leading-6 text-gray-900">Apellidos  <span class=" text-red-rv">*</span></label>
                                 <div class="mt-2.5">
                                     <input type="text" name="apellidos" id="apellidos" autocomplete="family-name"
                                         value="{{ $user->apellidos }}" readonly disabled
@@ -110,20 +110,8 @@
                 </div>
                 <div class="max-sm:col-span-3">
                     <label for="tipo_documento" class="block text-sm font-semibold leading-6 text-gray-900">Tipo
-                        Documento</label>
+                        Documento <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
-                        <!--<select id="tipo_documento" name="tipo_documento"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
-                                <option value="Seleccionar opción"
-                                    {{ $user->tip_documento == 'Seleccionar opción' ? 'selected' : '' }}>Seleccionar
-                                    opción</option>
-                                <option value="pasaporte" {{ $user->tip_documento == 'pasaporte' ? 'selected' : '' }}>
-                                    Pasaporte</option>
-                                <option value="dni" {{ $user->tip_documento == 'dni' ? 'selected' : '' }}>Dni
-                                </option>
-                                <option value="Otro" {{ $user->tip_documento == 'Otro' ? 'selected' : '' }}>Otro
-                                </option>
-                            </select>-->
                         <input type="text" name="tipo_documento" id="tipo_documento" autocomplete="family-name"
                             readonly value="{{ $user->tip_documento }}"
                             class="bg-gray-50 block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset
@@ -134,7 +122,7 @@
 
                 <div class="max-sm:col-span-3">
                     <label for="documento" class="block text-sm font-semibold leading-6 text-gray-900">N°
-                        Documento</label>
+                        Documento  <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <input type="text" name="documento" id="documento" autocomplete="family-name" readonly
                             value="{{ $user->documento }}"
@@ -145,7 +133,7 @@
 
                 <div class="max-sm:col-span-3">
                     <label for="nacimiento" class="block text-sm font-semibold leading-6 text-gray-900">Fecha de
-                        Nacimiento</label>
+                        Nacimiento  <span class=" text-red-rv">*</span></label>
                     <div class="relative max-w-sm mt-2.5">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -162,10 +150,10 @@
                 </div>
 
                 <div class="max-sm:col-span-3">
-                    <label for="genero" class="block text-sm font-semibold leading-6 text-gray-900">Género</label>
+                    <label for="genero" class="block text-sm font-semibold leading-6 text-gray-900">Género  <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <select id="genero" name="genero"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                             <option value="Seleccionar opción"
                                 {{ $user->sexo == 'Seleccionar opción' ? 'selected' : '' }}>Seleccionar opción
                             </option>
@@ -180,24 +168,24 @@
                 </div>
 
                 <div class="max-sm:col-span-3">
-                    <label for="edad" class="block text-sm font-semibold leading-6 text-gray-900">Edad</label>
+                    <label for="edad" class="block text-sm font-semibold leading-6 text-gray-900">Edad  <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <input type="text" name="edad" id="edad" autocomplete="given-name"
-                            value="{{ $user->edad }}"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            value="{{ $user->edad }}" placeholder="Ingresa tu edad"
+                            class="progress-field  block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
                     <label for="direccion"
-                        class="block text-sm font-semibold leading-6 text-gray-900">Dirección</label>
+                        class="block text-sm font-semibold leading-6 text-gray-900">Dirección  <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <input type="text" name="direccion" id="direccion" autocomplete="family-name"
-                            value="{{ $user->direccion }}"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            value="{{ $user->direccion }}" placeholder="Ingresa tu dirección"
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
-                    <label for="correo" class="block text-sm font-semibold leading-6 text-gray-900">Correo</label>
+                    <label for="correo" class="block text-sm font-semibold leading-6 text-gray-900">Correo  <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <input type="text" name="correo" id="correo" autocomplete="family-name"
                             value="{{ $user->email }}" readonly disabled
@@ -205,20 +193,20 @@
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
-                    <label for="celular" class="block text-sm font-semibold leading-6 text-gray-900">Celular
-                        Pasajero</label>
+                    <label for="celular" class="block text-sm font-semibold leading-6 text-gray-900">Celular Pasajero
+                        </label>
                     <div class="mt-2.5">
                         <input type="text" name="celular" id="celular" autocomplete="family-name"
-                            value="{{ $user->telefono }}" 
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            value="{{ $user->telefono }}" placeholder="Numero del alumno"
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
                     <label for="p_origen" class="block text-sm font-semibold leading-6 text-gray-900">País de
-                        Origen</label>
+                        Origen <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
-                        <select id="countries" name="p_origen"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                        <select id="countries" name="p_origen" 
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->es_name }}"
                                     {{ $user->pais_origen == $country->es_name ? 'selected' : '' }}>
@@ -239,7 +227,7 @@
                     <div class="mt-2.5">
                         <input type="text" name="nombre_emer" id="nombre_emer" autocomplete="given-name"
                             value="{{ $user->nombre_emer }}" placeholder="Ingrese el nombre del contacto de emergencia" 
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -248,7 +236,7 @@
                     <div class="mt-2.5">
                         <input type="text" name="apellido_emer" id="apellido_emer" autocomplete="family-name"
                             value="{{ $user->apellido_emer }}" placeholder="Ingrese los apellidos del contacto" 
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -265,10 +253,10 @@
                               </svg>                              
                         </button>
 
-                        <div id="tooltip-default" role="tooltip"placeholder="Ingrese el celular del contacto"
+                        <div id="tooltip-default" role="tooltip" placeholder="Ingrese el celular del contacto"
                             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium
                              text-white transition-opacity duration-300 bg-gray-900 rounded-lg
-                              shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                              shadow-sm opacity-0 tooltip">
                             Este numero servira para enviar<br>
                              las notificaciones acerca de las<br>
                               acciones del alumno en el viaje.
@@ -277,8 +265,8 @@
                     </div>
                     <div class="mt-2.5">
                         <input type="text" name="celular_emer" id="celular_emer" autocomplete="family-name"
-                            value="{{ $user->celular_emer }}"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            value="{{ $user->celular_emer }}" placeholder="Ingresa numero que recibira notifiaciones"
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
             </div>
@@ -297,7 +285,7 @@
                     <div class="mt-2.5">
                         <input type="text" name="hobbie" id="hobbie" autocomplete="given-name"
                             value="{{ $user->hobbies }}" placeholder="Ingrese los hobbies del alumno (ejem. Pintura, Fútbol)" 
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -305,16 +293,16 @@
                     <div class="mt-2.5">
                         <input type="text" name="deporte" id="deporte" autocomplete="family-name"
                             value="{{ $user->deportes }}" placeholder="Ingrese el deporte favorito del alumno (ejem.Fútbol)" 
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
-                <div class="max-sm:col-span-3">
+                <!--<div class="max-sm:col-span-3">
                     <label for="plato_fav" class="block text-sm font-semibold leading-6 text-gray-900">Plato
                         Favorito</label>
                     <div class="mt-2.5">
                         <input type="text" name="plato_fav" id="plato_fav" autocomplete="family-name"
                             value="{{ $user->plato_fav }}" placeholder="Ingrese el plato favorito del alumno (ejem: Pizza)"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -322,15 +310,15 @@
                     <div class="mt-2.5">
                         <input type="text" name="color" id="color" autocomplete="given-name"
                             value="{{ $user->color_fav }}" placeholder="Ingrese el color favorito del alumno (ejem: Azul)" 
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
-                </div>
+                </div>-->
                 <div class="max-sm:col-span-3">
                     <label for="act_relacional" class="block text-sm font-semibold leading-6 text-gray-900">Actitud
                         Relacional</label>
                     <div class="mt-2.5">
                         <select id="act_relacional" name="act_relacional"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                             <option value="Selecionar opcion"
                                 {{ $user->acti_relacional == 'Selecionar opcion' ? 'selected' : '' }}>Seleccionar
                                 opción</option>
@@ -356,12 +344,12 @@
                             class="bg-gray-50 text-gray-500 block w-full rounded-md border-0 px-3.5 py-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
-                <div class="max-sm:col-span-3">
+                <!--<div class="max-sm:col-span-3">
                     <label for="otr_conductas" class="block text-sm font-semibold leading-6 text-gray-900">Otras
                         Conductas</label>
                     <div class="mt-2.5">
                         <select id="otr_conductas" name="otr_conductas"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                             <option value="Seleccionar opcion"
                                 {{ $user->otr_conductas == 'Seleccionar opcion' ? 'selected' : '' }}>Seleccionar
                                 opción</option>
@@ -386,7 +374,7 @@
                                 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
                                 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
-                </div>
+                </div>-->
                 <div class="max-sm:col-span-3">
                     <label for="informacion_ad"
                         class="block text-sm font-semibold leading-6 text-gray-900">Información Adicional</label>
@@ -398,96 +386,11 @@
                 </div>
             </div>
 
-            <!-- RESPONSABLE GRUPO -->
-            <!--<div
-                class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 p-6 py-8 my-8
-                 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-                <div class="col-span-3">
-                    <x-texthead>
-                        {{ __('Responsable del Grupo') }}
-                    </x-texthead>
-                </div>
-
-                <div class="max-sm:col-span-3">
-                    <label for="nombre_r" class="block text-sm font-semibold leading-6 text-gray-900">Nombre del
-                        Responsable</label>
-                    <div class="mt-2.5">
-                        <input type="text" name="nombre_r" id="nombre_r" disabled value=""
-                            autocomplete="given-name"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
-                                text-black shadow-sm ring-1 ring-inset ring-gray-300
-                                 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                  focus:ring-red-rv sm:text-sm sm:leading-6">
-                    </div>
-                </div>
-                <div class="max-sm:col-span-3">
-                    <label for="numero_c" class="block text-sm font-semibold leading-6 text-gray-900">Número de
-                        Contacto</label>
-                    <div class="mt-2.5">
-                        <input type="text" name="numero_c" id="numero_c" disabled value=""
-                            autocomplete="family-name"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
-                                text-black shadow-sm ring-1 ring-inset ring-gray-300
-                                 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-                                  focus:ring-red-rv sm:text-sm sm:leading-6">
-                    </div>
-                </div>
-            </div>-->
-
-
-            <!-- CORREO PARA NOTIFICACIONES -->
-
-            <!--<div
-                class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 p-6 py-8 my-8
-                 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-
-                <div class="col-span-3">
-                    <x-texthead>
-                        {{ __('Correo para Notificaciones') }}
-                    </x-texthead>
-                </div>
-                <div class="p-6 max-sm:col-span-3">
-                    <label>Por favor, ingrese su correo electrónico para recibir notificaciones </label>
-                    <label for="email_r" class="block text-sm font-semibold leading-6 text-gray-900 mt-4">Correo
-                        de
-                        Notificaciones</label>
-                    <div class="mt-2.5">
-                        <input type="text" name="email_r" id="email_r" autocomplete="given-name"
-                            value="{{ $user->noti_email }}"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    </div>
-                </div>
-                <div class="bg-slate-900 p-6 rounded-lg max-sm:col-span-3">
-                    <div class="flex flex-row font-bold text-white-rv gap-x-3">
-                        <label class="text-xl">
-                            IMPORTANTE
-                        </label>
-                        <label>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-8">
-                                <path fill-rule="evenodd"
-                                    d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </label>
-                    </div>
-                    <div class="mt-2.5">
-                        <label class="text-white-rv font-Light">
-                            Al registrar su correo electrónico, recibirá notificaciones en tiempo real
-                            sobre cada etapa del viaje, incluyendo salidas, llegadas, actividades programadas,
-                            cualquier cambio en el itinerario, comprobante de pago, estado de cuenta y otros.
-                        </label>
-                    </div>
-                </div>
-            </div>-->
-
             <!-- BOTON GUARDAR -->
 
             <div class="flex flex-row justify-between pb-8 max-sm:flex-col-reverse gap-3">
                 <div>
-                    <a href="{{ route('mi-perfil') }}"
+                    <a href="{{ route('dashboard') }}"
                         class="flex flex-row items-center gap-4  max-sm:w-full border-2 border-gray-400 rounded-full w-48 py-5 justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -507,7 +410,7 @@
                     <span id="success-text"></span>
                 </div>
                 <div>
-                    <button type="submit"
+                    <button type="submit" id="guardar-cambios-btn"
                         class="block w-full rounded-full bg-red-rv px-16 py-5
                             text-center text-sm font-semibold text-white shadow-sm
                             hover:bg-red-rv">
@@ -519,50 +422,50 @@
         </div>
     </div>
 
-    @if(session('success'))
     <script>
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: "{{ session('success') }}",
-            showConfirmButton: false,
-            timer: 1500
+    document.getElementById('user-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita el envío tradicional del formulario
+
+        var formData = new FormData(this); // Obtén los datos del formulario
+
+        fetch('{{ route('user.update') }}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error al actualizar los datos',
+                    showConfirmButton: true,
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Ocurrió un error',
+                showConfirmButton: true,
+            });
         });
-    </script>
-    @endif
-
-    <script>
-        document.getElementById('user-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            let formData = new FormData(this);
-
-            fetch("{{ route('user.update') }}", {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                    },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const successMessage = document.getElementById('success-message');
-                        const successText = document.getElementById('success-text');
-
-                        successText.textContent = data.message;
-                        successMessage.classList.remove('hidden');
-
-                        // Opción: Puedes ocultar el mensaje después de unos segundos
-                        setTimeout(() => {
-                            successMessage.classList.add('hidden');
-                        }, 4000);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
-
+    });
+</script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var selectElement = document.getElementById('act_relacional');
@@ -653,5 +556,70 @@
             }
         });
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Seleccionamos todos los campos que queremos considerar para el progreso
+    const fields = document.querySelectorAll('.progress-field');
+    let progress = 0; // Variable para almacenar el porcentaje actual
 
+    function updateProgressBar() {
+    // Filtramos los campos que no están deshabilitados ni en readonly
+    const enabledFields = Array.from(fields).filter(field => !field.disabled && !field.readOnly);
+
+    // Contamos cuántos campos habilitados están llenos
+    const filledFields = enabledFields.filter(field => field.value.trim() !== '');
+
+    // Calculamos el porcentaje de campos llenos
+    progress = Math.round((filledFields.length / enabledFields.length) * 100);  // Actualizamos la variable progress
+
+    // Actualizamos la barra de progreso
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = progress + '%';
+    progressBar.setAttribute('aria-valuenow', progress);
+
+    // Actualizamos el texto dentro de la barra
+    progressBar.textContent = progress + '% completado';
+}
+
+
+    // Función para enviar el correo
+    function enviarCorreo() {
+        fetch('/enviar-correo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token
+            },
+            body: JSON.stringify({
+                mensaje: 'Tus datos fueron completados al 100%'
+            })
+        })
+        .then(response => response.json())
+        
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Añadimos un event listener al botón de "Guardar cambios"
+    const guardarCambiosBtn = document.getElementById('guardar-cambios-btn'); // Asegúrate de que el botón tenga este ID
+    guardarCambiosBtn.addEventListener('click', function(event) {
+        // Verificamos si el progreso está al 100%
+        if (progress === 100) {
+            enviarCorreo(); // Llamar a la función para enviar el correo si el progreso está al 100%
+        }
+    });
+
+    // Actualizamos la barra de progreso al cargar la página
+    updateProgressBar();
+
+    // Escuchamos los eventos de cambio en los campos para actualizar la barra en tiempo real
+    fields.forEach(field => {
+        field.addEventListener('input', updateProgressBar);
+        field.addEventListener('change', updateProgressBar);
+    });
+});
+
+
+</script>
 </x-approxana-layout>

@@ -19,6 +19,8 @@ protected $table = 'tr_checkin'; // Nombre de la tabla
         'caracteristicas',
         'peso',
         'images',
+	'images1',
+        'images2',
         'lugar_regis',
     ];
 

@@ -191,6 +191,11 @@
 			    <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Configuración') }}
                             </x-dropdown-link>
+			 @can('admin.users.index')
+			<x-dropdown-link :href="route('admin.users.index')">
+                                {{ __('Administrador') }}
+                                </x-dropdown-link>
+			@endcan
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -236,6 +241,13 @@
                     {{ __('Configuración de Cuenta') }}
                 </x-responsive-nav-link>
             </div>
+            @can('admin.users.index')
+	<div class="space-y-1">
+                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                    {{ __('Administrador') }}
+                </x-responsive-nav-link>
+            </div>
+ @endcan
             <div class="mb-3 space-y-1">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

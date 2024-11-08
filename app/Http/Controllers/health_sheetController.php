@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HealthSheet;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\CamposCompletadosMailFichaM;
+use Illuminate\Support\Facades\Mail;
 class health_sheetController extends Controller
 {
     /**
@@ -26,7 +28,20 @@ class health_sheetController extends Controller
     {
         //
     }
+        public function enviarCorreoF(Request $request)
+    {
+    // Obtén el correo del usuario autenticado
+    $usuario = Auth::user();
+    $email = $usuario->email;
 
+    // Obtén el mensaje del request
+    $mensaje = $request->input('mensaje', 'Has completado el 100% de tus datos.');
+
+    // Envía el correo
+    Mail::to($email)->send(new CamposCompletadosMailFichaM($mensaje));
+    //dd('Correo enviado');
+    return response()->json(['success' => true]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -96,6 +111,10 @@ class health_sheetController extends Controller
                 'alergia_ad_med' => $request->input('nom_alerg_ad'),
                 'alergia_ad_sum' => $request->input('sum_alerg_ad'),
                 'alergia_ad_dosis' => $request->input('dosi_alerg_ad'),
+		'tratamiento' => $request->input('tratamiento'),
+'enfermedad' => $request->input('enfermedad'),
+'alergia' => $request->input('medicamento'),
+'alergia_ad' => $request->input('alergia'),
                 'inmunizacion' => $inmunizaciones,
                 'vacunas_adicionales' => $request->input('vac_adicionales'),
                 'vacunas_covid' => $request->input('vacunas_covid'),

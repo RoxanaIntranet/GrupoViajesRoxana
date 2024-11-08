@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CreatePackagesController;
 use App\Http\Controllers\CreateTravelsController;
 use App\Http\Controllers\CreatePassengerController;
@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckinController;
+use App\Http\Controllers\DashboardController;
+use App\Mail\CamposCompletadosMail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +26,12 @@ use App\Http\Controllers\CheckinController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/*RUTAS ADMINISTRADOR*/
+Route::middleware('auth')->group(function () {
+route::resource('user', AdminUserController::class)->only('index', 'edit', 'update')->names('admin.users');
+});
+
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -53,7 +62,6 @@ Route::put('/usuarios/update-foto', [UserController::class, 'updateFoto'])->name
 Route::post('/upload-users', [UserController::class, 'import'])->name('users.import');
 Route::get('/importar-usuario', [UserController::class, 'importacionUser'])->name('importar.usuario');
 
-
 Route::get('/ficha-medica', [health_sheetController::class, 'show'])->name('ficha-medica.show');
 Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('ficha-medica.store');
 
@@ -67,6 +75,9 @@ Route::delete('/mi-checkin/{id}', [CheckinController::class, 'destroy'])->name('
 Route::post('/mi-checkin', [CheckinController::class, 'store'])->name('mi-checkin.store');
 });
 
+Route::get('/mis-pagos', [CreatePaymentsController::class, 'index'])->name('mis-pagos');
+Route::get('/mi-estado/{groupId}', [CreatePaymentsController::class, 'showTravelStatus'])->name('users.mi-estado');
+
 
 Route::get('/viajes', [CreateTravelsController::class, 'index'])->name('viajes');
 Route::get('/mi-viaje/{groupId}', [CreateTravelsController::class, 'showTripDetails'])->name('tu-viaje');
@@ -77,6 +88,10 @@ Route::get('/mi-viaje/{groupId}/ropaviajes', [CreateTravelsController::class, 'd
 Route::get('/mi-viaje/{groupId}/permisonotarial', [CreateTravelsController::class, 'downloadPermisoNotarial'])->name('download-permisonotarial');
 Route::get('/mi-viaje/{groupId}/voucher', [CreateTravelsController::class, 'downloadVoucher'])->name('download-voucher');
 Route::get('/mi-viaje/{groupId}/listaclinicas', [CreateTravelsController::class, 'downloadListaClinicas'])->name('download-listaclinicas');
+
+Route::post('/enviar-correo', [UserController::class, 'enviarCorreo'])->name('enviar.correo');
+Route::post('/enviar-correo-ficham', [health_sheetController::class, 'enviarCorreoF']);
+Route::post('/enviar-correo-fichan', [Sheet_NutritionalController::class, 'enviarCorreoN']);
 
 /*Route::get('/tu-viaje', function () {
     return view('users.tu-viaje');
@@ -100,7 +115,7 @@ Route::get('/mi-documento', function () {
 
 Route::get('/mi-cronograma', function () {
     return view('users.mi-cronograma');
-})->middleware(['auth', 'verified'])->name('mi-cronograma');
+})->middleware(['auth', 'verified'])->name('users.mi-cronograma');
 
 Route::get('/principal', function () {
     return view('users.principal');

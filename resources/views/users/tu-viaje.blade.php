@@ -23,7 +23,7 @@ Carbon::setLocale('es');
     <div class="mt-6 text-center sm:text-left pb-2">
         <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 flex flex-col justify-between max-sm:flex-col max-sm:px-4">
             <div>
-                <h2 class=" text-4xl pt-4 pb-2"><b>{{ $viaje->nombre_viaje }}</b></h2>		
+                <h2 class=" text-4xl pt-4 pb-2"><b>{{ $viaje->nombre_viaje }}</b></h2>
                 <p class=" text-lg py-2">Fecha: {{ Carbon::parse($viaje->fecha_viaje)->translatedFormat('d \\d\\e F Y') }}</p>
             </div>
             <div class=" bg-white rounded-b-lg shadow-lg">
@@ -34,30 +34,30 @@ Carbon::setLocale('es');
                         <p class=" text-lg pb-2"><span class=" text-gray-500 font-semibold">Teléfono: </span> +51 {{ $group->telefono_encargado }}</p>
                     </div>
                 </div>
-                <img src="{{ asset('images/' . $viaje->travel_image) }}" alt="{{ $viaje->nombre_viaje }}"  class="w-full">
+                <img src="{{ asset('images/' . $viaje->travel_image) }}" alt="{{ $viaje->nombre_viaje }}" class="w-full">
                 <div class=" p-12 max-sm:px-10  ">
                     <div>
                         <h4 class=" font-bold text-xl">Itinerario</h4>
                     </div>
-                    <div class="flex flex-row items-center gap-4">
+                    <div class="flex flex-row items-center gap-4 max-sm:flex-col">
                         <div class="border-2 border-gray-500 ">
                             <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
                             @if (!empty($viaje->itinerario))
-                                <p class=" bg-verde-rv text-white px-2">Disponible</p>
+                            <p class=" bg-green-600 text-white px-2">Disponible</p>
                             @else
-                                <p class=" bg-gray-500 text-white px-2">No Disponible</p>
+                            <p class=" bg-gray-500 text-white px-2">No Disponible</p>
                             @endif
                         </div>
                         <div>
                             <p class="py-2">Revisa el itinerario antes del viaje<br>
                                 para conocer de todas las actividades programadas.</p>
-                                @if($viaje->itinerario)
+                            @if($viaje->itinerario)
                             <a class=" border-2 border-gray-500 rounded-full px-16 py-2 inline-block"
                                 href="{{ route('download-itinerario', ['groupId' => $viaje->groupID]) }}">Ver</a>
-                                @else
-                                <span class="border-2 border-gray-500 rounded-full px-16 py-2 inline-block text-gray-400 cursor-not-allowed">
-                                    Ver
-                                </span>
+                            @else
+                            <span class="border-2 border-gray-500 rounded-full px-16 py-2 inline-block text-gray-400 cursor-not-allowed">
+                                Ver
+                            </span>
                             @endif
                         </div>
                     </div>
@@ -98,145 +98,160 @@ Carbon::setLocale('es');
         </div>
     </div>
 
-    <div class="mt-6 text-center sm:text-left pb-6 ">
+    <div class="mt-6 text-center sm:text-left pb-6 items-center">
         <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 flex flex-row justify-between max-sm:flex-col max-sm:px-4">
             <div class="bg-white rounded-b-lg shadow-lg w-full grid grid-cols-4 p-12 gap-5">
                 <div class=" col-span-4">
                     <p class="font-bold text-xl">Documentos del viaje</p>
                 </div>
-                <div class="col-span-4 flex flex-row max-sm:flex-col">
-                    <div class=" basis-1/4 flex flex-row items-center gap-2 max-sm:pb-8">
+                <div class="col-span-4 flex flex-row max-sm:flex-col max-sm:items-center">
+                    <div class=" col-span-2 basis-1/4 flex flex-row items-center gap-2 max-sm:pb-8">
                         <div>
-                            <p class="pb-2 max-sm:text-left">Indicaciones</p>
-                            <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
+                            <div class="border-2 border-gray-500 w-44 flex flex-col items-center rounded-lg">
+                                <p class="py-2 max-sm:text-left">Indicaciones</p>
                                 <img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28">
                                 @if (!empty($viaje->indicaciones))
-                                <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
-                                
+                                <p class="bg-green-600 text-white px-2 w-full text-center">Disponible</p>
                                 @else
                                 <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
                                 @endif
+                                <div class="text-left flex flex-col">
+                                    @if($viaje->indicaciones)
+                                    <a class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block"
+                                        href="{{ route('download-indicaciones', ['groupId' => $viaje->groupID]) }}">Ver</a>
+                                    @else
+                                    <span
+                                        class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block">
+                                        Ver
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-left flex flex-col">
-                            @if($viaje->indicaciones)
-                                    <a class="" href="{{ route('download-indicaciones', ['groupId' => $viaje->groupID]) }}">Ver</a>
-                                    <a class="" href="{{ route('download-indicaciones', ['groupId' => $viaje->groupID]) }}">Descargar</a>
-                            @else
-                                    <span>No Disponible Descarga</span>
-                            @endif
                         </div>
                     </div>
                     <div class=" basis-1/4 flex flex-row items-center gap-2 max-sm:pb-8">
                         <div>
-                            <p class="pb-2 max-sm:text-left">Recomendaciones</p>
-                            <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
+                            <div class="border-2 border-gray-500 w-44 flex flex-col items-center rounded-lg">
+                                <p class="pt-2 leading-5 text-center">Reglamento Estudiante</p>
                                 <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
                                 @if (!empty($viaje->recomendaciones))
-                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                <p class="bg-green-600 text-white px-2 w-full text-center">Disponible</p>
                                 @else
-                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
                                 @endif
+                                <div class="text-left flex flex-col">
+                                    @if($viaje->recomendaciones)
+                                    <a class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block"
+                                        href="{{ route('download-recomendaciones', ['groupId' => $viaje->groupID]) }}">Ver</a>
+                                    @else
+                                    <span
+                                        class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block">
+                                        Ver
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-left flex flex-col">
-                            @if($viaje->indicaciones)
-                            <a  class="" href="{{ route('download-recomendaciones', ['groupId' => $viaje->groupID]) }}">Ver</a>
-                            <a class="" href="{{ route('download-recomendaciones', ['groupId' => $viaje->groupID]) }}">Descargar</a>
-                            @else 
-                            <span>No Disponible Descarga</span>
-                            @endif
-
                         </div>
                     </div>
                     <div class=" basis-1/4 flex flex-row items-center gap-2 max-sm:pb-8">
                         <div>
-                            <p class="pb-2 max-sm:text-left">Ropa de Viaje</p>
-                            <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
+                            <div class="border-2 border-gray-500 w-44 flex flex-col items-center rounded-lg">
+                                <p class="py-2 max-sm:text-left">Ropa de Viaje</p>
                                 <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
                                 @if (!empty($viaje->ropa_viaje))
-                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                <p class="bg-green-600 text-white px-2 w-full text-center">Disponible</p>
                                 @else
-                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
                                 @endif
+                                <div class="text-left flex flex-col">
+                                    @if($viaje->ropa_viaje)
+                                    <a class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block"
+                                        href="{{ route('download-ropaviajes', ['groupId' => $viaje->groupID]) }}">Ver</a>
+                                    @else
+                                    <span
+                                        class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block">
+                                        Ver
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-left flex flex-col">
-                            @if($viaje->indicaciones)
-                            <a  class="" href="{{ route('download-ropaviajes', ['groupId' => $viaje->groupID]) }}">Ver</a>
-                            <a class="" href="{{ route('download-ropaviajes', ['groupId' => $viaje->groupID]) }}">Descargar</a>
-                            @else 
-                            <span>No Disponible Descarga</span>
-                            @endif
                         </div>
                     </div>
                     <div class=" basis-1/4 flex flex-row items-center gap-2 max-sm:pb-8">
                         <div>
-                            <p class="pb-2 max-sm:text-left">Permiso Notarial</p>
-                            <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
+                            <div class="border-2 border-gray-500 w-44 flex flex-col items-center rounded-lg">
+                                <p class="py-2 max-sm:text-left">Permiso Notarial</p>
                                 <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
                                 @if (!empty($viaje->permiso_notarial))
-                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                <p class="bg-green-600 text-white px-2 w-full text-center">Disponible</p>
                                 @else
-                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
                                 @endif
+                                <div class="text-left flex flex-col">
+                                    @if($viaje->permiso_notarial)
+                                    <a class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block"
+                                        href="{{ route('download-permisonotarial', ['groupId' => $viaje->groupID]) }}">Ver</a>
+                                    @else
+                                    <span
+                                        class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block">
+                                        Ver
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-left flex flex-col">
-                        @if($viaje->indicaciones)
-                            <a  class="" href="{{ route('download-permisonotarial', ['groupId' => $viaje->groupID]) }}">Ver</a>
-                            <a class="" href="{{ route('download-permisonotarial', ['groupId' => $viaje->groupID]) }}">Descargar</a>
-                        @else 
-                        <span>No Disponible Descarga</span>
-                        @endif
-
                         </div>
                     </div>
                 </div>
                 <div class="col-span-4">
                     <p class="font-bold text-xl">Tarjeta de Asistencia Médica del viaje</p>
                 </div>
-                <div class="col-span-4 flex flex-row max-sm:flex-col">
-                    <div class=" basis-1/2 flex flex-row items-center gap-2 max-sm:pb-8">
+                <div class="col-span-4 flex flex-row max-sm:flex-col max-sm:items-center">
+                    <div class=" basis-1/2 flex flex-row items-center gap-2 max-sm:pb-8 ">
                         <div>
-                            <p class="pb-2 max-sm:text-left">Voucher</p>
-                            <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
+                            <div class="border-2 border-gray-500 w-44 flex flex-col items-center rounded-lg">
+                                <p class="py-2 max-sm:text-left">Voucher</p>
                                 <p><img src="/images/Icons_Vaucher.png" alt="" class="w-28"></p>
                                 @if (!empty($viaje->voucher))
-                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                <p class="bg-green-600 text-white px-2 w-full text-center">Disponible</p>
                                 @else
-                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
                                 @endif
+                                <div class="text-left flex flex-col">
+                                    @if($viaje->indicaciones)
+                                    <a  class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block"
+                                        href="{{ route('download-voucher', ['groupId' => $viaje->groupID]) }}">Ver</a>
+                                    @else
+                                    <span
+                                        class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block">
+                                        Ver
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-left flex flex-col">
-                        @if($viaje->indicaciones)
-                            <a  class="" href="{{ route('download-voucher', ['groupId' => $viaje->groupID]) }}">Ver</a>
-                            <a class="" href="{{ route('download-voucher', ['groupId' => $viaje->groupID]) }}">Descargar</a>
-                        @else 
-                        <span>No Disponible Descarga</span>
-                        @endif
                         </div>
                     </div>
                     <div class=" basis-1/2 flex flex-row items-center gap-2">
                         <div>
-                            <p class="pb-2 max-sm:text-left">Lista de Clinicas <br> Cercanas al Hotel</p>
-                            <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
+                            <div class="border-2 border-gray-500 w-44 flex flex-col items-center rounded-lg">
+                                <p class="pt-2 leading-5 text-center">Lista de Clinicas Cercanas al Hotel</p>
                                 <p><img src="/images/Icons_Clinicas.png" alt="" class="w-28"></p>
                                 @if (!empty($viaje->lista_clinicas))
-                                <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
-                            @else
+                                <p class="bg-green-600 text-white px-2 w-full text-center">Disponible</p>
+                                @else
                                 <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
-                            @endif
+                                @endif
+                                <div class="text-left flex flex-col">
+                                    @if($viaje->indicaciones)
+                                    <a  class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block" 
+                                        href="{{ route('download-listaclinicas', ['groupId' => $viaje->groupID])}}">Ver</a>
+                                    @else
+                                    <span
+                                        class="my-2 border-2 border-gray-500 rounded-full px-12 py-1 inline-block">
+                                        Ver
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-left flex flex-col">
-                            @if($viaje->indicaciones)
-                            <a  class="" href="{{ route('download-listaclinicas', ['groupId' => $viaje->groupID])}}">Ver</a>
-                            <a class="" href="{{ route('download-listaclinicas', ['groupId' => $viaje->groupID]) }}">Descargar</a>
-                            @else 
-                        <span>No Disponible Descarga</span>
-                        @endif
                         </div>
                     </div>
                 </div>

@@ -17,8 +17,8 @@
         <div class="max-w-7xl mx-auto my-20 max-sm:my-10 sm:px-6 lg:px-8">
             <div class="flex flex-col text-center gap-6 px-40 max-sm:px-3">
                 <h3 class=" font-normal text-5xl">Mi perfil</h3>
-                <p>Mantener esta información actualizada es clave para garantizar una<br>
-                      experiencia de viaje segura y adaptada a tus necesidades.</p>
+                <p>Mantén tu información actualizada para disfrutar de un viaje seguro.<br>
+                 Toda tu información estará disponible en tu pulsera NFC para mayor tranquilidad y facilidad</p>
             </div>
         </div>
     </div>

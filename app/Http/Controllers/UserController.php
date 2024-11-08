@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CamposCompletadosMail;
 class UserController extends Controller
 {
     /**
@@ -29,6 +31,21 @@ class UserController extends Controller
     {
         //
     }
+
+public function enviarCorreo(Request $request)
+{
+    // Obtén el correo del usuario autenticado
+    $usuario = Auth::user();
+    $email = $usuario->email;  // Acceder al correo desde la columna email
+
+    // Obtén el mensaje del request, si lo necesitas
+    $mensaje = $request->input('mensaje', 'Has completado el 100% de tus datos.');
+
+    // Enviar el correo usando la clase de mail
+    Mail::to($email)->send(new CamposCompletadosMail($mensaje));
+
+    return response()->json(['success' => true]);
+}
 
     /**
      * Store a newly created resource in storage.
