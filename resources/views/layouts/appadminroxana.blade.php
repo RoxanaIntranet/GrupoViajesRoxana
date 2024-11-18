@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    
+
   <link rel="icon" href="favicon.ico"><link href="style.css" rel="stylesheet">
   <!-- TailAdmin CSS -->
   <link rel="stylesheet" href="{{ asset('tailadmin/style.css') }}">
@@ -81,27 +81,27 @@
               <div class="translate transform overflow-hidden" :class="(selected === 'Dashboard') ? 'block' :'hidden'">
                 <ul class="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="/packages" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('packages.create')}}" :class="page === 'ecommerce' && '!text-white'">
                     Crear Paquetes
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="/travels" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('travels_admin.create')}}" :class="page === 'ecommerce' && '!text-white'">
                     Crear Viajes
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="/groups" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('groups.create')}}" :class="page === 'ecommerce' && '!text-white'">
                     Crear Grupos
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="/passengers" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('passengers.create')}}" :class="page === 'ecommerce' && '!text-white'">
                     Crear Pasajero
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="/payments" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('payments_admin.create')}}" :class="page === 'ecommerce' && '!text-white'">
                     Crear Pagos
                     </a>
                   </li>
@@ -135,27 +135,27 @@
               <div class="translate transform overflow-hidden" :class="(selected === 'visualizacion') ? 'block' :'hidden'">
                 <ul class="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="www.google.com" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('packages.index')}}" :class="page === 'ecommerce' && '!text-white'">
                     Ver Paquetes
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="youtube.com" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('travels_admin.index')}}" :class="page === 'ecommerce' && '!text-white'">
                     Ver Viajes
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="youtube.com" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('groups.index')}}" :class="page === 'ecommerce' && '!text-white'">
                     Ver Grupos
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="youtube.com" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('passengers.index')}}" :class="page === 'ecommerce' && '!text-white'">
                     Ver Pasajero
                     </a>
                   </li>
                   <li>
-                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="youtube.com" :class="page === 'ecommerce' && '!text-white'">
+                    <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white" href="{{route('payments_admin.index')}}" :class="page === 'ecommerce' && '!text-white'">
                     Ver Pagos
                     </a>
                   </li>

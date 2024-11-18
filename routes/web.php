@@ -16,6 +16,14 @@ use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\DashboardController;
 use App\Mail\CamposCompletadosMail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\TravelsController;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\PackagesController;
+use App\Http\Controllers\GroupsController;
+use App\Http\Controllers\PassengersController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +37,7 @@ use Illuminate\Support\Facades\Mail;
 
 /*RUTAS ADMINISTRADOR*/
 Route::middleware('auth')->group(function () {
-route::resource('user', AdminUserController::class)->only('index', 'edit', 'update')->names('admin.users');
+    route::resource('user', AdminUserController::class)->only('index', 'edit', 'update')->names('admin.users');
 });
 
 
@@ -40,27 +48,36 @@ Route::get('/', function () {
         return view('auth.login');  // Asegúrate de que esta vista existe
     }
 });
-Route::get('/dashboardAdmin', [DashboardAdminController::class, 'index'])->name('dashboardAdmin');
-Route::get('/packages', [CreatePackagesController::class, 'index']);
+
+Route::get('/dashboardAdmin', [DashboardAdminController::class, 'index'])->name('dashboardAdmin');//esta ruta debería estar en la de administración
+
 Route::get('/travels', [CreateTravelsController::class, 'index']);
-Route::get('/groups', [CreateGroupsController::class, 'index']);
-Route::get('/passengers', [CreatePassengerController::class, 'index']);
+
+Route::resource('travels_admin', TravelsController::class);
+Route::resource('payments_admin', PaymentsController::class);
+Route::resource('packages', PackagesController::class);
+Route::resource('groups', GroupsController::class);
+Route::resource('passengers', PassengersController::class);
+
 Route::get('/payments', [CreatePaymentsController::class, 'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//Perfil
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//Usuarios
 Route::get('/usuarios', [UserController::class, 'show'])->name('users.mis-datos');
 Route::post('/usuarios', [UserController::class, 'update'])->name('user.update');
 Route::put('/usuarios/update-foto', [UserController::class, 'updateFoto'])->name('usuarios.updateFoto');
 Route::post('/upload-users', [UserController::class, 'import'])->name('users.import');
 Route::get('/importar-usuario', [UserController::class, 'importacionUser'])->name('importar.usuario');
+
 
 Route::get('/ficha-medica', [health_sheetController::class, 'show'])->name('ficha-medica.show');
 Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('ficha-medica.store');
