@@ -55,11 +55,14 @@ Route::get('/travels', [CreateTravelsController::class, 'index']);
 
 Route::resource('travels_admin', TravelsController::class);
 Route::resource('payments_admin', PaymentsController::class);
+Route::get('/payments/{id_user}', [PaymentsController::class, 'create_payments_users'])->name('payments_admin.index.payments_users');
+
 Route::resource('packages', PackagesController::class);
 Route::resource('groups', GroupsController::class);
 Route::resource('passengers', PassengersController::class);
 
 Route::get('/payments', [CreatePaymentsController::class, 'index']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

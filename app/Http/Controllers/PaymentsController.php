@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,8 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $payments=0;
-        return view('admin.show.payments', compact('payments'));
+        $passenger=User::all();
+        return view('admin.show.payments', compact('passenger'));
     }
 
     /**
@@ -25,11 +26,20 @@ class PaymentsController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        // Obtener todos los grupos a los que pertenece el usuario con sus respectivos viajes
-        $groups = $user->groups()->with('travel')->get();
+        $passengers=User::all();
+        return view('admin.payments.show_users', compact('passengers'));
+    }
 
-        return view('admin.create.payments', compact('groups'));
+    /**
+     * Show the form for creating a new resource.
+     * @param  int  $id_user
+     * @return \Illuminate\Http\Response
+     */
+    public function create_payments_users($id_user)
+    {
+        $passengers=User::find($id_user);
+        return $passengers;
+        return view('admin.payments.show_users', compact('passengers'));
     }
 
     /**
