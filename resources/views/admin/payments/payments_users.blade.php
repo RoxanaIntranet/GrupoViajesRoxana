@@ -6,31 +6,27 @@
                 <thead class="bg-gray-800 text-white">
                 <tr>
                     <th class="border border-gray-300 px-4 py-2">ID</th>
-                    <th class="border border-gray-300 px-4 py-2">Nombre</th>
-                    <th class="border border-gray-300 px-4 py-2">Apellidos</th>
-                    <th class="border border-gray-300 px-4 py-2">Telefono</th>
-                    <th class="border border-gray-300 px-4 py-2">Username</th>
-                    <th class="border border-gray-300 px-4 py-2">Email</th>
-                    <th class="border border-gray-300 px-4 py-2">Tipo de Documento</th>
-                    <th class="border border-gray-300 px-4 py-2">Nr de Documento</th>
-                    <th class="border border-gray-300 px-4 py-2">Acciónes</th>
+                    <th class="border border-gray-300 px-4 py-2">Tipo Grupo</th>
+                    <th class="border border-gray-300 px-4 py-2">Nombre Grupo</th>
+                    <th class="border border-gray-300 px-4 py-2">Tipo Encargado</th>
+                    <th class="border border-gray-300 px-4 py-2">Nombre Encargado</th>
+                    <th class="border border-gray-300 px-4 py-2">Telefono Encargado</th>
+                    <th class="border border-gray-300 px-4 py-2">Acción</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($passengers as $passenger)
+                @foreach($group_user as $passenger)
                     <tr class="bg-white hover:bg-gray-100">
-                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->id}}</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->name}}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{$passenger->apellidos}}</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->telefono}}</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->username}}</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->email}}</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->tip_documento}}</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->documento}}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->travelID}}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->tipo_grupo}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{$passenger->nombre_grupo}}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->tipo_encargado}}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->nombre_encargado}}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->telefono_encargado}}</td>
                         <td class="border border-gray-300 px-4 py-2 text-center">
-                            <a href="{{url('payments_admin.index.payments_users',$passenger->id)}}">
-                                <button class="text-blue-600 hover:text-blue-800">
-                                    <i class="fas fa-pen">Pagos {{$passenger->id}}}</i>
+                            <a href="{{route('payments_admin.index.payments_users_quota',$passenger->travelID)}}">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                    <i class="fas fa-pen">Cuota</i>
                                 </button>
                             </a>
                         </td>

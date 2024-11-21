@@ -29,8 +29,8 @@
                         <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->documento}}</td>
                         <td class="border border-gray-300 px-4 py-2 text-center">
                             <a href="{{route('payments_admin.index.payments_users',$passenger->id)}}">
-                                <button class="text-blue-600 hover:text-blue-800">
-                                    <i class="fas fa-pen">Pagos {{$passenger->id}}}</i>
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                    <i class="fas fa-pen">Pagos</i>
                                 </button>
                             </a>
                         </td>

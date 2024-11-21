@@ -56,6 +56,7 @@ Route::get('/travels', [CreateTravelsController::class, 'index']);
 Route::resource('travels_admin', TravelsController::class);
 Route::resource('payments_admin', PaymentsController::class);
 Route::get('/payments/{id_user}', [PaymentsController::class, 'create_payments_users'])->name('payments_admin.index.payments_users');
+Route::get('/payments_quota/{id_group_user}', [PaymentsController::class, 'create_payments_users_quota'])->name('payments_admin.index.payments_users_quota');
 
 Route::resource('packages', PackagesController::class);
 Route::resource('groups', GroupsController::class);

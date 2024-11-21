@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +39,19 @@ class PaymentsController extends Controller
     public function create_payments_users($id_user)
     {
         $passengers=User::find($id_user);
-        return $passengers;
-        return view('admin.payments.show_users', compact('passengers'));
+        $group_user=$passengers->groups;
+        return view('admin.payments.payments_users', compact('group_user'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @param  int  id_group_user
+     * @return \Illuminate\Http\Response
+     */
+    public function create_payments_users_quota($id_group_user)
+    {
+        $group_user=GroupUser::find($id_group_user);
+        return view('admin.payments.quota', compact('group_user'));
     }
 
     /**
