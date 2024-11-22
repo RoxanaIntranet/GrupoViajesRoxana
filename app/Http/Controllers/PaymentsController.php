@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupUser;
+use App\Models\Quota;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ class PaymentsController extends Controller
     public function create_payments_users_quota($id_group_user)
     {
         $group_user=GroupUser::find($id_group_user);
+        //return $group_user;
         return view('admin.payments.quota', compact('group_user'));
     }
 
@@ -62,7 +64,44 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Obtener todos los datos del formulario
+        $data = $request->all();
+    //return $data;
+        // Filtrar solo las cuotas (fecha y precio)
+        $cuotas = [];
+
+        foreach ($data as $key => $value) {
+            if (str_starts_with($key, 'fecha_')) {
+                // Extraer el índice numérico de la cuota
+                $index = str_replace('fecha_', '', $key);
+                $cuotas[$index]['fecha'] = $value;
+            } elseif (str_starts_with($key, 'precio_')) {
+                // Extraer el índice numérico de la cuota
+                $index = str_replace('precio_', '', $key);
+                $cuotas[$index]['precio'] = $value;
+            }
+        }
+
+        // Ordenar las cuotas por índice
+        ksort($cuotas);
+
+        // Aquí puedes procesar o almacenar las cuotas
+        foreach ($cuotas as $i => $cuota) {
+            // Ejemplo: Guardar cada cuota en la base de datos
+            Quota::create([
+                'group_user' => $request->input('id_group_user'),
+                'codigo' => $request->input('codigo_viaje'),
+                'quota' => $i,
+                'amount' => $cuota['precio'],
+                'date' => $cuota['fecha'],
+                'status_pay' => '0',
+                'valid_status' => '0',
+                'resume' => $i.' cuota',
+            ]);
+        }
+
+        return redirect()->route('payments_admin.index')->with('success', 'Cuotas registradas exitosamente.');
+
     }
 
     /**
