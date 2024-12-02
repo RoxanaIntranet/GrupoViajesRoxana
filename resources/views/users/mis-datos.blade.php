@@ -25,18 +25,19 @@
         </div>
     </div>
 
-
-    <div class="mt-6 text-center sm:text-left ">
-        <div class="max-w-7xl mx-auto mt-10 mb-8 sm:px-6 lg:px-8 max-sm:px-6" >
+    
+    <div class="mt-6 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto mt-10 sm:px-6 lg:px-8 max-sm:px-4">
             <div class="flex flex-row text-center gap-6 mb-8 items-center max-sm:flex-col">
                 <h3 class=" font-normal text-5xl">Mis Datos</h3>
-                
                 <div class="progress w-80 bg-gray-300 rounded-md">
-                    <p class="progress-bar text-center bg-green-400 border border-green-400 rounded-md w-72" role="progressbar" id="progress-bar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0% completado</p>
+                    <p class="progress-bar text-center bg-green-400 border border-green-400 rounded-md w-72" role="progressbar" id="progress-bar" style="width: 0%"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0% completado</p>
                 </div>
             </div>
-            <div>
-                <p>Actualiza tu información personal para que podamos brindarte un servicio más personalizado y eficiente.</p>
+            <div class="flex flex-row items-center">
+                <img src="/images/nurse.png" alt="">
+                <p class="pr-20">Actualiza tu información personal para que podamos brindarte un servicio más personalizado y eficiente.</p>
             </div>
         </div>
     </div>
@@ -139,7 +140,8 @@
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2
+                                     2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
                         </div>
                         <input datepicker id="default-datepicker" name="nacimiento" type="text"
@@ -189,7 +191,8 @@
                     <div class="mt-2.5">
                         <input type="text" name="correo" id="correo" autocomplete="family-name"
                             value="{{ $user->email }}" readonly disabled
-                            class="bg-gray-50  block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="bg-gray-50  block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300
+                             placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -198,7 +201,8 @@
                     <div class="mt-2.5">
                         <input type="text" name="celular" id="celular" autocomplete="family-name"
                             value="{{ $user->telefono }}" placeholder="Numero del alumno"
-                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-gray-300
+                             placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -206,7 +210,8 @@
                         Origen <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <select id="countries" name="p_origen" 
-                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset
+                             ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->es_name }}"
                                     {{ $user->pais_origen == $country->es_name ? 'selected' : '' }}>
@@ -223,26 +228,28 @@
                 </div>
                 <div class="max-sm:col-span-3">
                     <label for="nombre_emer"
-                        class="block text-sm font-semibold leading-6 text-gray-900">Nombres</label>
+                        class="block text-sm font-semibold leading-6 text-gray-900">Nombres <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <input type="text" name="nombre_emer" id="nombre_emer" autocomplete="given-name"
                             value="{{ $user->nombre_emer }}" placeholder="Ingrese el nombre del contacto de emergencia" 
-                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1
+                             ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
                     <label for="apellido_emer"
-                        class="block text-sm font-semibold leading-6 text-gray-900">Apellidos</label>
+                        class="block text-sm font-semibold leading-6 text-gray-900">Apellidos <span class=" text-red-rv">*</span></label>
                     <div class="mt-2.5">
                         <input type="text" name="apellido_emer" id="apellido_emer" autocomplete="family-name"
                             value="{{ $user->apellido_emer }}" placeholder="Ingrese los apellidos del contacto" 
-                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1
+                             ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
                     <div class="flex flex-row gap-2">
                         <label for="celular_emer"
-                            class="block text-sm font-semibold leading-6 text-gray-900">Celular</label>
+                            class="block text-sm font-semibold leading-6 text-gray-900">Celular <span class=" text-red-rv">*</span></label>
 
                         <button data-tooltip-target="tooltip-default" type="button"
                             class="text-white bg-red-rv hover:bg-red-rv
@@ -266,7 +273,8 @@
                     <div class="mt-2.5">
                         <input type="text" name="celular_emer" id="celular_emer" autocomplete="family-name"
                             value="{{ $user->celular_emer }}" placeholder="Ingresa numero que recibira notifiaciones"
-                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1
+                             ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
             </div>
@@ -285,7 +293,8 @@
                     <div class="mt-2.5">
                         <input type="text" name="hobbie" id="hobbie" autocomplete="given-name"
                             value="{{ $user->hobbies }}" placeholder="Ingrese los hobbies del alumno (ejem. Pintura, Fútbol)" 
-                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1
+                             ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -293,7 +302,8 @@
                     <div class="mt-2.5">
                         <input type="text" name="deporte" id="deporte" autocomplete="family-name"
                             value="{{ $user->deportes }}" placeholder="Ingrese el deporte favorito del alumno (ejem.Fútbol)" 
-                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1
+                             ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <!--<div class="max-sm:col-span-3">
@@ -381,7 +391,8 @@
                     <div class="mt-2.5">
                         <input type="text" name="informacion_ad" id="informacion_ad" autocomplete="family-name"
                             value="{{ $user->informacion_ad }}" placeholder="Ingrese otra información relevante (ejemplo: Tiene alergia a los cacahuetes)" 
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1
+                             ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
             </div>

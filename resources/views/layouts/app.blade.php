@@ -16,7 +16,7 @@
     @if (app()->environment('local'))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
-    <link rel="stylesheet" href="{{ asset('build/assets/app-CgCektIQ.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-3FKf5xIL.css') }}">
     <script type="module" src="{{ asset('build/assets/app-D_CBjKNX.js') }}"></script>
     @endif
 </head>
