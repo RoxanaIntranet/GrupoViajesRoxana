@@ -53,6 +53,7 @@ class PaymentsController extends Controller
     {
         $group_user=GroupUser::find($id_group_user);
         //return $group_user;
+        //dd($id_group_user);
         return view('admin.payments.quota', compact('group_user'));
     }
 
