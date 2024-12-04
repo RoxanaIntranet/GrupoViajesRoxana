@@ -39,9 +39,10 @@ class PaymentsController extends Controller
      */
     public function create_payments_users($id_user)
     {
-        $passengers=User::find($id_user);
-        $group_user=$passengers->groups;
-        return view('admin.payments.payments_users', compact('group_user'));
+        $group_user=GroupUser::where('user_id', $id_user)->get();
+        $user=User::find($id_user);
+        //dd($group_user);
+        return view('admin.payments.payments_users', compact('group_user','user'));
     }
 
     /**
@@ -51,8 +52,8 @@ class PaymentsController extends Controller
      */
     public function create_payments_users_quota($id_group_user)
     {
-        $group_user=GroupUser::find($id_group_user);
-        //return $group_user;
+        //dd($id_group_user);
+        $group_user=GroupUser::where('id',$id_group_user)->first();
         return view('admin.payments.quota', compact('group_user'));
     }
 
@@ -66,7 +67,7 @@ class PaymentsController extends Controller
     {
         // Obtener todos los datos del formulario
         $data = $request->all();
-    //return $data;
+        //return $data;
         // Filtrar solo las cuotas (fecha y precio)
         $cuotas = [];
 

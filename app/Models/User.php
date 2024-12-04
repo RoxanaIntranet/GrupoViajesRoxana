@@ -80,6 +80,11 @@ class User extends Authenticatable
         return $this->belongsToMany(CreateGroups::class, 'group_user', 'user_id', 'group_id');
     }
 
+    public function groups_user(): BelongsToMany
+    {
+        return $this->belongsToMany(GroupUser::class, 'group_user', 'user_id', 'group_id');
+    }
+
     /**
      * The attributes that should be cast.
      *
