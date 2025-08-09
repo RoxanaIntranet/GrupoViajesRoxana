@@ -39,7 +39,9 @@ class PaymentsController extends Controller
      */
     public function create_payments_users($id_user)
     {
-        $group_user=GroupUser::where('user_id', $id_user)->get();
+        $group_user=GroupUser::where('user_id', $id_user)
+        ->with('group.travel') // Carga las relaciones
+        ->get();
         $user=User::find($id_user);
         //dd($group_user);
         return view('admin.payments.payments_users', compact('group_user','user'));
@@ -101,7 +103,7 @@ class PaymentsController extends Controller
             ]);
         }
 
-        return redirect()->route('payments_admin.index')->with('success', 'Cuotas registradas exitosamente.');
+        return back()->with('success', 'Cuotas registradas exitosamente.');
 
     }
 

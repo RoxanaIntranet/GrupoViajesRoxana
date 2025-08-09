@@ -21,4 +21,8 @@ class Quota extends Model
         'valid_status',
         'resume'
     ];
+    public function groupUser()
+    {
+        return $this->belongsTo(GroupUser::class, 'group_user');
+    }
 }

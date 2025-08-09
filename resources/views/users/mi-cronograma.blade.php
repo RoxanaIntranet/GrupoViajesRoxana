@@ -43,37 +43,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class=" bg-gray-100 py-4 ">
-                                <td class="py-4">1</td>
-                                <td class="py-4">04/02/24</td>
-                                <td class="py-4">Dólares ($USD)</td>
-                                <td class="py-4">300</td>
-                            </tr>
-                            <tr class="py-4">
-                                <td class="py-4">2</td>
-                                <td class="py-4">04/03/24</td>
-                                <td class="py-4">Dólares ($USD)</td>
-                                <td class="py-4">300</td>
-                            </tr>
-                            <tr class="bg-gray-100 py-4">
-                                <td class="py-4">3</td>
-                                <td class="py-4">04/04/24</td>
-                                <td class="py-4">Dólares ($USD)</td>
-                                <td class="py-4">300</td>
-                            </tr>
-                            <tr class="">
-                                <td class="py-4">4</td>
-                                <td class="py-4">04/05/24</td>
-                                <td class="py-4">Dólares ($USD)</td>
-                                <td class="py-4">300</td>
-                            </tr>
-                            <tr class="bg-gray-100 py-4">
-                                <td class="py-4">5</td>
-                                <td class="py-4">04/06/24</td>
-                                <td class="py-4">Dólares ($USD)</td>
-                                <td class="py-4">300</td>
-                            </tr>
+                            @forelse($quotas as $quota)
+                                <tr class="{{ $loop->even ? 'bg-gray-100' : '' }}">
+                                    <td class="py-4">{{ $quota->quota }}</td>
+                                    <td class="py-4">{{ \Carbon\Carbon::parse($quota->date)->format('d/m/Y') }}</td>
+                                    <td class="py-4">{{ $tipo_moneda }}</td>
+                                    <td class="py-4">{{ number_format($quota->amount, 2) }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="py-4 text-gray-500">No hay cuotas registradas para este viaje.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
+                        
                     </table>
                 </div>
 

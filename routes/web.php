@@ -134,9 +134,8 @@ Route::get('/mi-documento', function () {
     return view('users.mi-documento');
 })->middleware(['auth', 'verified'])->name('mi-documento');
 
-Route::get('/mi-cronograma', function () {
-    return view('users.mi-cronograma');
-})->middleware(['auth', 'verified'])->name('users.mi-cronograma');
+Route::get('/mi-cronograma/{groupId}', [CreatePaymentsController::class, 'showPaymentSchedule'])->name('users.mi-cronograma');
+
 
 Route::get('/principal', function () {
     return view('users.principal');

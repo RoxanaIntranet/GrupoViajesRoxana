@@ -27,4 +27,9 @@ class GroupUser extends Model
     {
         return $this->belongsTo(CreateGroups::class,'group_id', 'groupID');
     }
+    public function quotas()
+    {
+        return $this->hasMany(Quota::class, 'group_user', 'id');
+    }
+
 }

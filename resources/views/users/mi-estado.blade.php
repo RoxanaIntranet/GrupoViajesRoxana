@@ -47,44 +47,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class=" bg-gray-100 py-4 ">
-                                <td class="py-4">1</td>
-                                <td class="py-4">$USD 300.00</td>
-                                <td class="py-4"><p class="bg-green-300 "><i>icono</i> pagado</p></td>
-                                <td class="py-4">-</td>
-                                <td class="py-4"> </td>
-                            </tr>
-                            <tr class="py-4">
-                                <td class="py-4">2</td>
-                                <td class="py-4">$USD 300.00</td>
-                                <td class="py-4">Incompleto</td>
-                                <td class="py-4">-</td>
-                                <td class="py-4"> </td>
-                            </tr>
-                            <tr class="bg-gray-100 py-4">
-                                <td class="py-4">3</td>
-                                <td class="py-4">$USD 300.00</td>
-                                <td class="py-4">Pendiente</td>
-                                <td class="py-4">Falta $USD 250.00</td>
-                                <td class="py-4"> </td>
-                            </tr>
-                            <tr class="">
-                                <td class="py-4">4</td>
-                                <td class="py-4">$USD 300.00</td>
-                                <td class="py-4">Pendiente</td>
-                                <td class="py-4">-</td>
-                                <td class="py-4">Registrar Pago</td>
-                            </tr>
-                            <tr class="bg-gray-100 py-4">
-                                <td class="py-4">5</td>
-                                <td class="py-4">$USD 300.00</td>
-                                <td class="py-4">Pendiente</td>
-                                <td class="py-4">-</td>
-                                <td class="py-4">Registrar Pago</td>
-                            </tr>
+                            @forelse($quotas as $quota)
+                                <tr class="{{ $loop->even ? 'bg-gray-100' : '' }}">
+                                    <td class="py-4">{{ $quota->quota }}</td>
+                                    <td class="py-4">$USD {{ number_format($quota->amount, 2) }}</td>
+                                    <td class="py-4">
+                                        @if($quota->status_pay == 1)
+                                            <span class="bg-green-300 px-2 py-1 rounded">Pagado</span>
+                                        @else
+                                            <span class="bg-yellow-300 px-2 py-1 rounded">Pendiente</span>
+                                        @endif
+                                    </td>
+                                    <td class="py-4">{{ $quota->resume }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="py-4 text-gray-500">No hay cuotas registradas para este viaje.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
+                        
                     </table>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -108,15 +93,15 @@
                         <tbody>
                             <tr class=" bg-gray-100 py-4 ">
                                 <td class="py-4">Total del viaje</td>
-                                <td class="py-4">$USD 1500.00</td>
+                                <td class="py-4">{{ number_format($travel->costo_total, 2) }}</td>
                             </tr>
                             <tr class="py-4">
                                 <td class="py-4">Pagado</td>
-                                <td class="py-4">$USD 650.00</td>
+                                <td class="py-4">-</td>
                             </tr>
                             <tr class="bg-gray-100 py-4">
                                 <td class="py-4">Pendiente</td>
-                                <td class="py-4">$USD 850.00</td>
+                                <td class="py-4">-</td>
                             </tr>
                         </tbody>
                     </table>

@@ -2,7 +2,8 @@
     <div class="mt-6 text-center sm:text-left">
         <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 max-sm:pl-8">
             <a href="{{ route('dashboard') }}"
-                class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center
+                        hover:bg-red-rv hover:border-2 hover:border-red-rv hover:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
@@ -29,7 +30,7 @@
                 <div class="flex items-center justify-center max-sm:m-4 max-sm:mt-0">
                     <a href="{{ route('users.mis-datos') }}"
                         class=" w-11/12 border-2 border-gray-500 px-3.5 py-2 rounded-xl
-                     bg-white flex flex-col justify-center items-center hover:shadow-xl">
+                     bg-white flex flex-col justify-center items-center hover:shadow-xl hover:border-red-rv">
                         <p class="font-bold text-3xl pt-10 pb-2">Mis Datos</p>
                         <!--<p class="text-center px-8 bg-green-400 border border-green-400 rounded-md">95% completado</p>-->
                         <img src="/images/data.png" alt="#" class="py-6">
@@ -48,7 +49,7 @@
                 <div class="flex items-center justify-center max-sm:m-4 max-sm:mt-0">
                     <a href="{{ route('ficha-medica.show') }}"
                         class=" w-11/12 border-2 border-gray-500 px-3.5 py-2 rounded-xl
-                     bg-white flex flex-col justify-center items-center hover:shadow-xl">
+                     bg-white flex flex-col justify-center items-center hover:shadow-xl hover:border-red-rv">
                         <p class="font-bold text-3xl pt-10 pb-2">Ficha Médica</p>
                         <!--<p class="text-center px-8 bg-green-400 border border-green-400 rounded-md">95% completado</p>-->
                         <img src="/images/nurse.png" alt="#" class="py-6">
@@ -67,7 +68,7 @@
                 <div class="flex items-center justify-center max-sm:m-4 max-sm:mt-0">
                     <a href="{{ route('nutritional-sheet.show') }}"
                         class=" w-11/12 border-2 border-gray-500 px-3.5 py-2 rounded-xl
-                     bg-white flex flex-col justify-center items-center hover:shadow-xl">
+                     bg-white flex flex-col justify-center items-center hover:shadow-xl hover:border-red-rv">
                         <p class="font-bold text-3xl pt-10 pb-2">Ficha Nutricional</p>
                         <!--<p class="text-center px-8 bg-green-400">95% completado</p>-->
                         <img src="/images/health.png" alt="#" class="py-6">

@@ -6,6 +6,7 @@
                 <thead class="bg-gray-800 text-white">
                 <tr>
                     <th class="border border-gray-300 px-4 py-2">ID</th>
+                    <th class="border border-gray-300 px-4 py-2">Viaje</th>
                     <th class="border border-gray-300 px-4 py-2">Tipo Grupo</th>
                     <th class="border border-gray-300 px-4 py-2">Nombre Grupo</th>
                     <th class="border border-gray-300 px-4 py-2">Tipo Encargado</th>
@@ -18,6 +19,7 @@
                 @foreach($group_user as $passenger)
                     <tr class="bg-white hover:bg-gray-100">
                         <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->group->travelID}}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->group->travel->nombre_viaje ?? 'Sin asignar'}}</td>
                         <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->group->tipo_grupo}}</td>
                         <td class="border border-gray-300 px-4 py-2">{{$passenger->group->nombre_grupo}}</td>
                         <td class="border border-gray-300 px-4 py-2 text-center">{{$passenger->group->tipo_encargado}}</td>

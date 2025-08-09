@@ -6,6 +6,8 @@ use App\Models\CreatePayments;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CreateGroups;
 use App\Models\Travel;
+use App\Models\GroupUser;
+use App\Models\Quota;
 use Illuminate\Http\Request;
 
 class CreatePaymentsController extends Controller
@@ -26,16 +28,67 @@ class CreatePaymentsController extends Controller
 
     public function showTravelStatus($groupId)
 {
-    // Obtener el grupo con el viaje relacionado usando el ID del grupo
+    // Obtener el grupo con el viaje relacionado
     $group = CreateGroups::with('travel')->find($groupId);
 
-    if ($group && $group->travel) {
-        $travel = $group->travel;
-        return view('users.mi-estado', compact('travel', 'group'));
-    } else {
+    if (!$group || !$group->travel) {
         return redirect()->route('dashboard')->with('error', 'Viaje no encontrado.');
     }
+
+    // Obtener el registro de group_user correspondiente al usuario actual
+    $groupUser = GroupUser::where('group_id', $groupId)
+        ->where('user_id', Auth::id()) // Asegúrate de que sea para el usuario autenticado
+        ->first();
+
+    if (!$groupUser) {
+        return redirect()->route('dashboard')->with('error', 'No se encontró un grupo válido para este usuario.');
+    }
+
+    // Obtener las cuotas relacionadas con este group_user
+    $quotas = $groupUser->quotas()->orderBy('quota')->get();
+
+    // Pasar los datos a la vista
+    return view('users.mi-estado', [
+        'travel' => $group->travel,
+        'group' => $group,
+        'quotas' => $quotas,
+    ]);
 }
+
+
+public function showPaymentSchedule($groupId)
+{
+    // Obtener el grupo con el viaje relacionado
+    $group = CreateGroups::with('travel')->find($groupId);
+
+    if (!$group || !$group->travel) {
+        return redirect()->route('dashboard')->with('error', 'Viaje no encontrado.');
+    }
+
+    // Obtener el registro de group_user correspondiente al usuario actual
+    $groupUser = GroupUser::where('group_id', $groupId)
+        ->where('user_id', Auth::id()) // Asegúrate de que sea para el usuario autenticado
+        ->first();
+
+    if (!$groupUser) {
+        return redirect()->route('dashboard')->with('error', 'No se encontró un grupo válido para este usuario.');
+    }
+
+    // Obtener las cuotas relacionadas con este group_user
+    $quotas = $groupUser->quotas()->orderBy('quota')->get();
+
+    // Obtener el tipo de moneda desde el viaje relacionado
+    $tipo_moneda = $group->travel->tipo_moneda;
+
+    // Pasar los datos a la vista
+    return view('users.mi-cronograma', [
+        'travel' => $group->travel,
+        'group' => $group,
+        'quotas' => $quotas,
+        'tipo_moneda' => $tipo_moneda,
+    ]);
+}
+
 
 
     /**
