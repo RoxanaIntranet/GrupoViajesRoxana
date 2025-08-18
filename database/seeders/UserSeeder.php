@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
             'username'  => 'ROXANA_AD',
             'name'  => 'Roxana',
             'apellidos' => 'Admin',
-            'password' => bcrypt('Lima2020$#Trav')
+            'password' => bcrypt('Lima2020$#Trav'),
+            'email' => 'roxana_ad@gmail.com'
         ])->assignRole('Admin');
     }
 }
